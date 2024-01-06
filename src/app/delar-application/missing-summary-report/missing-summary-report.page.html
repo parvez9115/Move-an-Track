@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar class="dealerHeader">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Missing Summary Report</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row class="wrapper-container">
+    <ion-col size="12">
+      <form [formGroup]="missingform">
+        <ion-row class="form-field">
+          <ion-col size="12" size-lg="3" size-md="3">
+            <ion-label class="label-head">Company ID:</ion-label>
+            <ion-input
+              type="text"
+              placeholder="Enter the Comapny Id"
+              class="input"
+              formControlName="companyid"
+            ></ion-input>
+          </ion-col>
+
+          <ion-col size="12" size-lg="3" size-md="3">
+            <ion-label class="label-head">Plate No:</ion-label>
+            <ion-input
+              type="text"
+              placeholder="Enter the Plate No"
+              class="input"
+              formControlName="plateno"
+            ></ion-input>
+          </ion-col>
+
+          <ion-col size="12" size-lg="3" size-md="3">
+            <ion-label class="label-head">Date:</ion-label>
+            <ion-input
+              type="date"
+              formControlName="startdate"
+              class="input"
+            ></ion-input>
+          </ion-col>
+
+          <ion-col
+            size="12"
+            size-lg="2.5"
+            size-md="2.5"
+            style="margin-top: 27px; text-align: center"
+          >
+            <ion-button
+              class="submitbtn"
+              (click)="Submit()"
+              [disabled]="!missingform.valid || button"
+              >Submit</ion-button
+            >
+            <ion-button class="submitbtn" (click)="clear()">Clear</ion-button>
+          </ion-col>
+        </ion-row>
+      </form>
+    </ion-col>
+  </ion-row>
+</ion-content>

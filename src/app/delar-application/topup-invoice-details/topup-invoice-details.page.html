@@ -1,0 +1,307 @@
+<ion-header>
+  <ion-toolbar mode="md" class="dealerHeader">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons
+      *ngIf="myPlatform == 'desktop'&&companyId == 'apm-sa'"
+      slot="start"
+    >
+      <ion-icon
+        routerLink="/tabs-login/esim-dashboard"
+        name="arrow-back"
+        style="padding: 10px; cursor: pointer"
+        slot="start"
+      ></ion-icon>
+    </ion-buttons>
+    <ion-row>
+      <ion-title *ngIf="myPlatform != 'desktop'"
+        >Topup Invoice Details</ion-title
+      >
+      <ion-title *ngIf="myPlatform == 'desktop'"
+        >Device Invoice Details</ion-title
+      >
+      <ion-col
+        *ngIf="myPlatform == 'desktop'"
+        size="8"
+        style="text-align: right"
+      >
+        <ion-button class="submitBtn" size="small" (click)="newfunc()"
+          >Export</ion-button
+        >
+        <ion-row style="margin: 0px; padding: 0; float: right">
+          <ion-col style="margin-top: 0" class="tooltip">
+            <ion-fab-button
+              size="small"
+              class="fab-btn"
+              href="https://kingstrackimages.s3.ap-southeast-1.amazonaws.com/EsimExcelDowmload/DeviceTopupInvoice.xlsx"
+              download="sample.xlsx"
+            >
+              <div class="excel-wrapper"></div>
+            </ion-fab-button>
+            <span class="tooltiptext">Excel-Format</span>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [scrollEvents]="true" (ionScroll)="logScrolling($event)">
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngIf="myPlatform != 'desktop'" style="text-align: right">
+        <ion-row style="margin: 0px; padding: 0; float: right">
+          <ion-col style="margin-top: 0" class="tooltip">
+            <ion-fab-button
+              size="small"
+              class="fab-btn"
+              href="https://kingstrackimages.s3.ap-southeast-1.amazonaws.com/EsimExcelDowmload/DeviceTopupInvoice.xlsx"
+              download="sample.xlsx"
+            >
+              <div class="excel-wrapper"></div>
+            </ion-fab-button>
+            <span class="tooltiptext">Excel-Format</span>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="myPlatform == 'desktop'" class="upperRow">
+      <ion-col
+        [ngClass]="{selectedUpperCol:'true'}"
+        routerLink="/tabs-login/esim-purchase-details"
+        routerLinkActive="selected"
+        size="1.9"
+      >
+        <ion-label>Esim Purchase Invoice</ion-label>
+      </ion-col>
+      <ion-col
+        [ngClass]="{selectedUpperCol:'true'}"
+        routerLink="/tabs-login/esim-sales-invoice-details"
+        routerLinkActive="selected"
+        size="1.9"
+      >
+        <ion-label>Device Sales Invoice</ion-label>
+      </ion-col>
+      <ion-col
+        [ngClass]="{selectedUpperCol:'true'}"
+        routerLink="/tabs-login/device-renewal-invoice-details"
+        routerLinkActive="selected"
+        size="1.9"
+      >
+        <ion-label>Device Renewal Invoice</ion-label>
+      </ion-col>
+      <ion-col
+        [ngClass]="{selectedUpperCol:'true'}"
+        routerLink="/tabs-login/topup-invoice-details"
+        routerLinkActive="selected"
+        size="1.9"
+      >
+        <ion-label>Device Topup Invoice</ion-label>
+      </ion-col>
+      <ion-col
+        [ngClass]="{selectedUpperCol:'true'}"
+        routerLink="/tabs-login/device-extend-oneyear-invoice-details"
+        routerLinkActive="selected"
+        size="1.9"
+      >
+        <ion-label>Device Extend 1 Yr Invoice</ion-label>
+      </ion-col>
+      <ion-col
+        [ngClass]="{selectedUpperCol:'true'}"
+        routerLink="/tabs-login/device-certificate-invoice-details"
+        routerLinkActive="selected"
+        size="1.9"
+      >
+        <ion-label>Device Certificate Invoice</ion-label>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="head">
+      <ion-col
+        [ngClass]="{'selectedUpperColll': 'true'}"
+        routerLink="/tabs-login/device-topup-invoice-details"
+        routerLinkActive="click"
+        size="3"
+      >
+        <ion-label>Old </ion-label>
+      </ion-col>
+
+      <ion-col
+        style="margin-left: 10px"
+        [ngClass]="{'selectedUpperColll': 'true'}"
+        routerLink="/tabs-login/topup-invoice-details"
+        routerLinkActive="click"
+        size="3"
+      >
+        <ion-label>New</ion-label>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="wrapper-container">
+      <ion-col size="12">
+        <form [formGroup]="topupinvoiceForm">
+          <ion-row class="form-field">
+            <ion-col size="12" size-lg="2.4" size-md="2.4">
+              <ion-label class="label-head">Dealer:</ion-label>
+              <ionic-selectable
+                class="input selectable-input"
+                formControlName="dealerid"
+                placeholder="Select the Dealer"
+                [items]="Dealer"
+                [canSearch]="true"
+                [hasVirtualScroll]="true"
+              >
+              </ionic-selectable>
+            </ion-col>
+
+            <ion-col size="12" size-lg="2.4" size-md="2.4">
+              <ion-label class="label-head">Invoice Date:</ion-label>
+              <ion-input
+                type="date"
+                formControlName="invoicedate"
+                [max]="maxDate"
+                class="input"
+                disabled
+              ></ion-input>
+            </ion-col>
+
+            <ion-col size="12" size-lg="2.4" size-md="2.4">
+              <ion-label class="label-head">No of Units:</ion-label>
+              <ion-input
+                type="number"
+                placeholder="Enter the Units"
+                formControlName="noofunits"
+                class="input"
+              >
+              </ion-input>
+            </ion-col>
+
+            <ion-col size="12" size-lg="2.4" size-md="2.4">
+              <ion-label class="label-head">File Upload:</ion-label>
+              <input
+                type="file"
+                (change)="onFileChange($event)"
+                formControlName="fileupload"
+                class="documents"
+              />
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col
+              size="1.8"
+              (mouseover)="pendinginvoice()"
+              (click)="invoicepopup()"
+              style="
+                margin: 12px;
+                padding-top: 10px;
+                height: 39px;
+                cursor: pointer;
+              "
+            >
+              <ion-label
+                style="
+                  padding: 8px;
+                  border: 1px solid black;
+                  background-color: #f59e0b;
+                  border-radius: 5px;
+                  color: #fff;
+                  font-weight: 400;
+                "
+              >
+                Pending Invoice
+                <span
+                  *ngIf="color != 'red'"
+                  style="
+                    background-color: #28e070;
+                    padding: 1px;
+                    padding-left: 5px;
+                    padding-right: 5px;
+                    border-radius: 20px;
+                    color: #000;
+                    font-weight: bold;
+                    font-size: 16px;
+                  "
+                  >{{invoices.pending}}</span
+                >
+                <span
+                  *ngIf="color == 'red'"
+                  style="
+                    background-color: red;
+                    padding: 1px;
+                    padding-left: 5px;
+                    padding-right: 5px;
+                    border-radius: 20px;
+                    color: #fff;
+                    font-weight: bold;
+                    font-size: 16px;
+                  "
+                  >{{invoices.pending}}</span
+                ></ion-label
+              >
+            </ion-col>
+            <ion-col style="text-align: end">
+              <ion-button
+                class="submitbtn"
+                (click)="add()"
+                [disabled]="!topupinvoiceForm.valid || button"
+                >Request for Invoice</ion-button
+              >
+              <ion-button class="submitbtn" (click)="clear()">Clear</ion-button>
+            </ion-col>
+          </ion-row>
+        </form>
+      </ion-col>
+    </ion-row>
+
+    <jqxGrid
+      #myGrid
+      [theme]="'material'"
+      (onRowclick)="myGridOnRowSelect($event)"
+      [width]="'99%'"
+      [autoheight]="true"
+      [source]="dataAdapter"
+      [enablebrowserselection]="true"
+      [sortable]="true"
+      [filterable]="true"
+      [columns]="columns"
+      [columnsresize]="true"
+      [enabletooltips]="true"
+      [pageable]="true"
+      [showfilterrow]="true"
+      style="
+        font-size: 16px;
+        text-align: center !important;
+        margin: auto;
+        cursor: pointer;
+      "
+    >
+    </jqxGrid>
+  </ion-grid>
+
+  <ion-fab
+    *ngIf="arrow"
+    style="margin-right: 1%; margin-bottom: 9%"
+    slot="fixed"
+    vertical="bottom"
+    horizontal="end"
+  >
+    <ion-fab-button class="fabbutton" size="small" (click)="scrollToTop()">
+      <ion-icon class="icon" name="arrow-up"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-fab
+    *ngIf="arrow"
+    style="margin-right: 1%; margin-bottom: 5%"
+    slot="fixed"
+    vertical="bottom"
+    horizontal="end"
+  >
+    <ion-fab-button class="fabbutton" size="small" (click)="scrollToBottom()">
+      <ion-icon class="icon" name="arrow-down"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

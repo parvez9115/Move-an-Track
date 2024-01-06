@@ -1,0 +1,140 @@
+input {
+  margin-top: 7px;
+  margin-left: 10%;
+}
+
+#myGrid {
+  border: 1px solid;
+}
+.akash {
+  padding-left: 8px;
+}
+
+#submitbtn {
+  --background: #6252ee !important;
+}
+
+.cardCenter {
+  display: grid;
+  border-left: 2px solid #6252ee;
+  background-color: white;
+}
+
+.uploaderRow {
+  align-items: center;
+  margin-left: 100px;
+  // justify-content: space-evenly;
+}
+.uploader {
+  align-items: center;
+  margin-left: 35px;
+}
+.apple {
+  align-items: center;
+  // justify-content: space-evenly;
+  margin-left: 100px;
+}
+
+.submitBtn {
+  margin: 0px 14px 0px 0px;
+  --ion-color-primary: #7c68f8;
+  --background: white;
+  --color: #7c68f8;
+  --background-hover: #7c68f8;
+  --color-hover: white;
+}
+
+.pdf-wrapper,
+.excel-wrapper {
+  background: url("../../../assets/excelNew.svg") no-repeat;
+  width: 18px;
+  height: 20px;
+}
+ion-card-title {
+  padding: 10px;
+}
+ion-card-subtitle {
+  padding: 10px;
+}
+ion-card-content {
+  padding: 0;
+}
+.fab-btn {
+  --background: lavender;
+  --box-shadow: none;
+  position: absolute;
+  top: -15px;
+  right: -4px;
+  height: 30px;
+  width: 30px;
+}
+
+.fab-btn:hover {
+  --background-hover: #b6b6b6;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  background-color: transparent;
+  color: white;
+
+  margin-top: -28px;
+  margin-left: -70px;
+  white-space: nowrap;
+  position: absolute;
+  z-index: 1;
+  font-size: 12px;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+.tooltipRenewal {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltipRenewal .tooltiprenewaltext {
+  visibility: hidden;
+  background-color: transparent;
+  color: white;
+
+  margin-top: -28px;
+  margin-left: -110px;
+  white-space: nowrap;
+  position: absolute;
+  z-index: 1;
+  font-size: 12px;
+}
+
+.tooltipRenewal:hover .tooltiprenewaltext {
+  visibility: visible;
+}
+
+.tooltipca {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltipca .tooltipcatext {
+  visibility: hidden;
+  background-color: transparent;
+  color: white;
+
+  margin-top: -28px;
+  white-space: nowrap;
+  margin-left: -80px;
+  position: absolute;
+  z-index: 1;
+  font-size: 12px;
+}
+
+.tooltipca:hover .tooltipcatext {
+  visibility: visible;
+}

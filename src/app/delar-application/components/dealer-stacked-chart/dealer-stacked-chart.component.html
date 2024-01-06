@@ -1,0 +1,19 @@
+<div [style.display]="endis ? 'block' : 'none'">
+  <smart-chart
+    #chart
+    id="chart"
+    [animationDuration]="animationDuration"
+    [animation]="'advanced'"
+    [caption]="caption"
+    [description]="description"
+    [showLegend]="showLegend"
+    [padding]="padding"
+    [titlePadding]="titlePadding"
+    [dataSource]="dataSource"
+    [xAxis]="xAxis"
+    [colorScheme]="colorScheme"
+    [seriesGroups]="seriesGroups"
+  ></smart-chart>
+
+  <div *ngIf="loader" class="loader">Loading...</div>
+</div>

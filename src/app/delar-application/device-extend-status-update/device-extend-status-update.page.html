@@ -1,0 +1,177 @@
+<ion-header>
+  <ion-toolbar mode="md" class="dealerHeader">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons
+      *ngIf="myPlatform == 'desktop'&&companyId == 'apm-sa'"
+      slot="start"
+    >
+      <ion-icon
+        routerLink="/tabs-login/esim-dashboard"
+        name="arrow-back"
+        style="padding: 10px; cursor: pointer"
+        slot="start"
+      ></ion-icon>
+    </ion-buttons>
+    <ion-row>
+      <ion-title *ngIf="myPlatform != 'desktop'"
+        >Extend 1 Yr Status Update</ion-title
+      >
+      <ion-title *ngIf="myPlatform == 'desktop'"
+        >Device Status Update Details</ion-title
+      >
+      <ion-col
+        *ngIf="myPlatform == 'desktop'"
+        size="4"
+        style="text-align: right"
+      >
+        <ion-button class="submitBtn" size="small" (click)="newfunc()"
+          >Export</ion-button
+        >
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [scrollEvents]="true" (ionScroll)="logScrolling($event)">
+  <ion-row *ngIf="myPlatform == 'desktop'" class="upperRow">
+    <ion-col
+      [ngClass]="{ selectedUpperCol: 'true' }"
+      routerLink="/tabs-login/esim-ca-report"
+      routerLinkActive="selected"
+      size="1.9"
+    >
+      <ion-label>Ca Status Update</ion-label>
+    </ion-col>
+    <ion-col
+      [ngClass]="{ selectedUpperCol: 'true' }"
+      routerLink="/tabs-login/esim-renewal-status-update"
+      routerLinkActive="selected"
+      size="1.9"
+    >
+      <ion-label>Renewal Status Update</ion-label>
+    </ion-col>
+    <ion-col
+      [ngClass]="{ selectedUpperCol: 'true' }"
+      routerLink="/tabs-login/device-topup-status-update"
+      routerLinkActive="selected"
+      size="1.9"
+    >
+      <ion-label>Topup Status Update</ion-label>
+    </ion-col>
+    <ion-col
+      [ngClass]="{ selectedUpperCol: 'true' }"
+      routerLink="/tabs-login/device-extend-status-update"
+      routerLinkActive="selected"
+      size="1.9"
+    >
+      <ion-label>Extend 1 Yr Status Update</ion-label>
+    </ion-col>
+    <ion-col
+    [ngClass]="{ selectedUpperCol: 'true' }"
+    routerLink="/tabs-login/esim-bsnl-certificate"
+    routerLinkActive="selected"
+    size="1.9"
+  >
+    <ion-label>BSNL Certificate Request</ion-label>
+  </ion-col>
+  </ion-row>
+
+  <ion-row *ngIf="myPlatform != 'desktop'">
+    <ion-col class="form-field">
+      <ion-row>
+        <ion-col style="margin: 10px 0px 0px">
+          <ion-label>
+            <span class="dealer-label">Total Selected Row :</span>
+            <span class="dealer-data">{{selectedRow?.length}}</span>
+          </ion-label>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col style="text-align: end">
+          <ion-button
+            size="small"
+            class="submitbtn"
+            (click)="bulkstatusModel()"
+            [disabled]="checkbutton"
+            >Status Update</ion-button
+          >
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+
+  <ion-row *ngIf="myPlatform == 'desktop'">
+    <ion-col style="margin: 10px 0px 0px">
+      <ion-label>
+        <span class="dealer-label">Total Selected Row :</span>
+        <span class="dealer-data">{{selectedRow?.length}}</span>
+      </ion-label>
+    </ion-col>
+    <ion-col style="margin: 10px 0px 0px; text-align: end">
+      <ion-button
+        class="submitbtn"
+        (click)="bulkstatusModel()"
+        [disabled]="checkbutton"
+        >Status Update</ion-button
+      >
+    </ion-col>
+  </ion-row>
+
+  <ion-row style="padding: 10px">
+    <ion-col size="12">
+      <jqxGrid
+        #myGrid
+        [selectionmode]="'checkbox'"
+        (onRowclick)="myGridOnRowclick($event)"
+        (onRowselect)="myGridOnRowSelect($event)"
+        (onRowunselect)="myGridOnRowSelect($event)"
+        [theme]="'material'"
+        [width]="'99%'"
+        [autoheight]="true"
+        [source]="dataAdapter"
+        [columns]="columns"
+        [enablebrowserselection]="true"
+        [sortable]="true"
+        [filterable]="true"
+        [columns]="columns"
+        [columnsresize]="true"
+        [enabletooltips]="true"
+        [pageable]="true"
+        [showfilterrow]="true"
+        style="
+          font-size: 16px;
+          text-align: center !important;
+          margin: auto;
+          cursor: pointer;
+        "
+      >
+      </jqxGrid>
+    </ion-col>
+  </ion-row>
+
+  <ion-fab
+    *ngIf="arrow"
+    style="margin-right: 1%; margin-bottom: 9%"
+    slot="fixed"
+    vertical="bottom"
+    horizontal="end"
+  >
+    <ion-fab-button class="fabbutton" size="small" (click)="scrollToTop()">
+      <ion-icon class="icon" name="arrow-up"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-fab
+    *ngIf="arrow"
+    style="margin-right: 1%; margin-bottom: 5%"
+    slot="fixed"
+    vertical="bottom"
+    horizontal="end"
+  >
+    <ion-fab-button class="fabbutton" size="small" (click)="scrollToBottom()">
+      <ion-icon class="icon" name="arrow-down"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

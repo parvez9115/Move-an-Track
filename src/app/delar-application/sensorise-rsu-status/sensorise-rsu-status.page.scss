@@ -1,0 +1,22 @@
+@media only screen and (min-width: 768px) {
+  .input {
+    margin-top: 12px;
+  }
+  #submitbtn {
+    width: 20%;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .form-field {
+    zoom: 80%;
+  }
+  #submitbtn {
+    width: 80%;
+  }
+}
+
+.form-field {
+  margin: 0px 5px 0px;
+  border-radius: 7px;
+}

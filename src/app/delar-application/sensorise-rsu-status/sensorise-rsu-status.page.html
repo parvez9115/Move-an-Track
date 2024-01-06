@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar class="dealerHeader">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Sensorise RSU Detail</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- <ion-row>
+    <ion-col class="form-field" style="text-align: right">
+      <ion-button class="submitbtn" (click)="export()" [disabled]="showButton"
+        >Export</ion-button
+      >
+    </ion-col></ion-row
+  > -->
+  <ion-row>
+    <ion-col size="12">
+      <ion-row class="form-field" style="justify-content: end;">
+        <!-- <ion-col size="12" size-lg="3" size-md="3">
+            <ion-label class="label-head">File Upload:</ion-label>
+            <input type="file" (change)="onFileChange($event)" formControlName="fileupload" class="documents" />
+          </ion-col> -->
+        <ion-col size="12" size-lg="2.4" size-md="2.4" style="margin: 25px 0px 0px; text-align: center">
+          <ion-button class="submitbtn" (click)="export()" [disabled]="showButton">Submit</ion-button>
+          <ion-button class="submitbtn" (click)="clear()">Clear</ion-button>
+        </ion-col>
+      </ion-row>
+
+    </ion-col>
+  </ion-row>
+
+  <ion-row style="margin-top: 10px">
+    <ion-col>
+      <jqxGrid #myGrid (onRowclick)="myGridOnRowclick($event)" (onRowselect)="myGridOnRowSelect($event)"
+        (onRowunselect)="myGridOnRowSelect($event)" [selectionmode]="'checkbox'" [theme]="'material'" [width]="'99%'"
+        [autoheight]="true" [pagesizeoptions]="page" [source]="dataAdapter" [enablebrowserselection]="true"
+        [columns]="columns" [sortable]="true" [filterable]="true" [columns]="columns" [columnsresize]="true"
+        [enabletooltips]="true" [pageable]="true" [showfilterrow]="true" style="
+          font-size: 16px;
+          text-align: center !important;
+          margin: auto;
+          cursor: pointer;
+        ">
+      </jqxGrid>
+    </ion-col>
+  </ion-row>
+</ion-content>

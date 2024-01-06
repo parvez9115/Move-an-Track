@@ -1,0 +1,36 @@
+.header {
+  font-size: 16px;
+  color: white;
+}
+.arrow-back {
+  color: white;
+}
+.dismiss {
+  font-size: 25px;
+  cursor: pointer;
+}
+.dismiss:hover {
+  color: red;
+}
+.dealer-label {
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px;
+}
+.imei-content {
+  text-align: right;
+  align-self: center;
+  font-size: 18px;
+}
+.input {
+  border: 1px solid #e5e5e5;
+  height: 42px;
+  line-height: 18px;
+  --padding-start: 15px;
+  background: #e8e8e8;
+  margin: 7px;
+}
+.selectable-input {
+  padding: 8px 11px 4px 8px;
+  margin-top: 5px;
+}

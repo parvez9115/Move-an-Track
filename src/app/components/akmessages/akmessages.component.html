@@ -1,0 +1,12 @@
+<div class="bg">
+  <img
+    [src]="
+      message == 'No Data Found' ||
+      message == 'Link Not Available' ||
+      message == 'No Vehicle is Available'
+        ? '../../../assets/background_img/caution-svgrepo-com.svg'
+        : '../../../assets/background_img/broken-link-chain-svgrepo-com 2.svg'
+    "
+  />
+  <p>{{ message }}</p>
+</div>

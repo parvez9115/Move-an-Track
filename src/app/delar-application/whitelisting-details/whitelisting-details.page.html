@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-toolbar mode="md" class="dealerHeader">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-row>
+      <ion-title>Whitelisting Details</ion-title>
+      <ion-col *ngIf="myPlatform == 'desktop'">
+        <ion-row style="margin: 0px; padding: 0; float: right">
+          <ion-col style="margin-top: 0" class="tooltip">
+            <ion-fab-button size="small" class="fab-btn"
+              href="https://kingstrackimages.s3.ap-southeast-1.amazonaws.com/WhitelistingExcelDowmload/Whitelisting.xlsx"
+              download="sample.xlsx">
+              <div class="excel-wrapper"></div>
+            </ion-fab-button>
+            <span class="tooltiptext">Excel-Format</span>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row *ngIf="myPlatform != 'desktop'">
+      <ion-col>
+        <ion-row style="margin: 0px; padding: 0; float: right">
+          <ion-col style="margin-top: 0" class="tooltip">
+            <ion-fab-button size="small" class="fab-btn"
+              href="https://kingstrackimages.s3.ap-southeast-1.amazonaws.com/WhitelistingExcelDowmload/Whitelisting.xlsx"
+              download="sample.xlsx">
+              <div class="excel-wrapper"></div>
+            </ion-fab-button>
+            <span class="tooltiptext">Excel-Format</span>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="wrapper-container">
+      <ion-col size="12">
+        <form [formGroup]="whitelistform">
+          <ion-row class="form-field">
+            <ion-col size="12" size-lg="2.4" size-md="2.4">
+              <ion-label class="label-head">Dealer:</ion-label>
+
+              <ionic-selectable class="input selectable-input" placeholder="Select the Dealer"
+                formControlName="dealername" [items]="dealerlist" [canSearch]="true" [hasVirtualScroll]="true">
+              </ionic-selectable>
+            </ion-col>
+            <ion-col size="12" size-lg="3" size-md="3">
+              <ion-label class="label-head">File Upload:</ion-label>
+              <input type="file" (change)="onFileChange($event)" formControlName="fileupload" class="documents" />
+            </ion-col>
+
+            <ion-col size="12" size-lg="2.4" size-md="2.4" style="margin: 20px 0px 0px; text-align: end">
+              <ion-button class="submitbtn" (click)="submit()"
+                [disabled]="!whitelistform.valid || button">Submit</ion-button>
+              <ion-button class="submitbtn" type="reset" (click)="clear()">Clear</ion-button>
+            </ion-col>
+          </ion-row>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

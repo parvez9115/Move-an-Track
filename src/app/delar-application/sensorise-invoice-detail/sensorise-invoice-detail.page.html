@@ -1,0 +1,178 @@
+<ion-header>
+  <ion-toolbar class="dealerHeader">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Sensorise Invoice Detail</ion-title>
+    <ion-button
+      *ngIf="myPlatform == 'desktop'"
+      slot="end"
+      class="submitBtn"
+      size="small"
+      (click)="newfunc()"
+      >Export</ion-button
+    >
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row class="head">
+      <ion-col
+        [ngClass]="{'selectedUpperColll': 'true'}"
+        routerLink="/tabs-login/sensorise-invoice-detail"
+        routerLinkActive="click"
+        size="3"
+      >
+        <ion-label>Old </ion-label>
+      </ion-col>
+
+      <ion-col
+        style="margin-left: 10px"
+        [ngClass]="{'selectedUpperColll': 'true'}"
+        routerLink="/tabs-login/sensorise-invoice-detail-new"
+        routerLinkActive="click"
+        size="3"
+      >
+        <ion-label>New</ion-label>
+      </ion-col>
+    </ion-row>
+    <ion-row class="wrapper-container">
+      <ion-col size="12">
+        <form [formGroup]="PurchaseForm">
+          <ion-row class="form-field">
+            <ion-col size="12" size-lg="2.4" size-md="2.4">
+              <ion-label class="label-head">Invoice Number:</ion-label>
+              <ion-input
+                type="text"
+                placeholder="Enter the Invoice No"
+                formControlName="invoicenumber"
+                class="input"
+              ></ion-input>
+            </ion-col>
+
+            <ion-col size="12" size-lg="2.4" size-md="2.4">
+              <ion-label class="label-head">Invoice Date:</ion-label>
+              <ion-input
+                type="date"
+                formControlName="invoicedate"
+                [max]="maxDate"
+                class="input"
+              ></ion-input>
+            </ion-col>
+
+            <ion-col size="12" size-lg="2.4" size-md="2.4">
+              <ion-label class="label-head">Invoice Amount:</ion-label>
+              <ion-input
+                type="number"
+                placeholder="Enter the Invoice Amount"
+                formControlName="invoiceamount"
+                class="input"
+              ></ion-input>
+            </ion-col>
+
+            <ion-col size="12" size-lg="2.4" size-md="2.4">
+              <ion-label class="label-head">Action Name:</ion-label>
+              <ionic-selectable
+                class="input selectable-input"
+                placeholder="Select the Action"
+                formControlName="actionname"
+                [items]="actionvalue"
+                (onChange)="getproductlist($event)"
+                [canSearch]="true"
+                [hasVirtualScroll]="true"
+              >
+              </ionic-selectable>
+            </ion-col>
+
+            <ion-col size="12" size-lg="2.4" size-md="2.4">
+              <ion-label class="label-head">Product Name :</ion-label>
+              <ion-input
+                type="text"
+                *ngIf="!showSerialNo"
+                placeholder="Select the Product Name"
+                formControlName="productname"
+                class="input"
+                disabled
+              ></ion-input>
+              <ionic-selectable
+                *ngIf="showSerialNo"
+                class="input selectable-input"
+                formControlName="productname"
+                placeholder="Select Product Name"
+                [items]="Productlist"
+                [hasVirtualScroll]="true"
+                [canSearch]="true"
+              >
+              </ionic-selectable>
+            </ion-col>
+
+            <ion-col size="12" size-lg="2.4" size-md="2.4">
+              <ion-label class="label-head">Quantity:</ion-label>
+              <ion-input
+                type="number"
+                placeholder="Enter the Qty"
+                formControlName="noofunits"
+                class="input"
+              ></ion-input>
+            </ion-col>
+
+            <ion-col size="12" size-lg="2.4" size-md="2.4">
+              <ion-label class="label-head">Invoice Document:</ion-label>
+              <input
+                style="margin-top: 10px; margin-left: 5px"
+                type="file"
+                class="documents"
+                formControlName="invoicedocument"
+                ng2FileSelect
+                [uploader]="uploader"
+              />
+            </ion-col>
+
+            <ion-col style="margin: 27px 0px 0px; text-align: end">
+              <ion-button
+                *ngIf="!hideSerialNo"
+                class="submitbtn"
+                (click)="add()"
+                [disabled]="!PurchaseForm.valid || button"
+                >Add</ion-button
+              >
+              <ion-button
+                *ngIf="hideSerialNo"
+                class="submitbtn"
+                (click)="edit()"
+                [disabled]="!PurchaseForm.valid || button"
+                >Save</ion-button
+              >
+              <ion-button class="submitbtn" (click)="clear()">Clear</ion-button>
+            </ion-col>
+          </ion-row>
+        </form>
+      </ion-col>
+    </ion-row>
+
+    <jqxGrid
+      #myGrid
+      [theme]="'material'"
+      (onRowclick)="myGridOnRowSelect($event)"
+      [width]="'99%'"
+      [autoheight]="true"
+      [enablebrowserselection]="true"
+      [source]="dataAdapter"
+      [sortable]="true"
+      [filterable]="true"
+      [columns]="columns"
+      [columnsresize]="true"
+      [enabletooltips]="true"
+      [pageable]="true"
+      [showfilterrow]="true"
+      style="
+        font-size: 16px;
+        text-align: center !important;
+        margin: auto;
+        cursor: pointer;
+      "
+    >
+    </jqxGrid>
+  </ion-grid>
+</ion-content>

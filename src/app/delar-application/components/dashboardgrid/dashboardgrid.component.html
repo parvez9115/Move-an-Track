@@ -1,0 +1,83 @@
+<ion-header *ngIf="popHeader != undefined">
+  <ion-toolbar class="dealerHeader">
+    <ion-buttons slot="start">
+      <ion-icon
+        (click)="cancel()"
+        name="arrow-back"
+        style="padding: 10px; cursor: pointer"
+        slot="start"
+      ></ion-icon>
+    </ion-buttons>
+    <ion-title>Comments</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-row *ngIf="popHeader == undefined" style="padding: 10px">
+  <ion-col>
+    <jqxGrid
+      #myGrid
+      [theme]="'material'"
+      [width]="'99%'"
+      [autoheight]="true"
+      [source]="dataAdapter"
+      [columns]="columns"
+      [sortable]="true"
+      [filterable]="true"
+      [columnsresize]="true"
+      [enablebrowserselection]="true"
+      [enabletooltips]="true"
+      [pageable]="true"
+      [pagesizeoptions]="page"
+      [showfilterrow]="true"
+      (onRowclick)="myGridOnRowclick($event)"
+      style="
+        font-size: 16px;
+        text-align: center !important;
+        margin: auto;
+        cursor: pointer;
+      "
+    >
+    </jqxGrid>
+  </ion-col>
+</ion-row>
+
+<!-- <div class="isempty" *ngIf="endis == true">
+  <img src="../../../../assets/3582365.jpg" />
+  <div class="empty-state__message">No Data Found</div>
+</div> -->
+
+<ion-content *ngIf="popHeader != undefined">
+  <ion-row style="padding: 10px">
+    <ion-col>
+      <jqxGrid
+        #myGrid
+        [theme]="'material'"
+        [width]="'99%'"
+        [autoheight]="true"
+        [source]="dataAdapter"
+        [columns]="columns"
+        [sortable]="true"
+        [filterable]="true"
+        [columnsresize]="true"
+        [enablebrowserselection]="true"
+        [enabletooltips]="true"
+        [pageable]="true"
+        [pagesizeoptions]="page"
+        [showfilterrow]="true"
+        (onRowclick)="myGridOnRowclick($event)"
+        style="
+          font-size: 16px;
+          text-align: center !important;
+          margin: auto;
+          cursor: pointer;
+        "
+      >
+      </jqxGrid>
+    </ion-col>
+  </ion-row>
+
+  <!-- <div class="isempty" *ngIf="endis == true">
+    <img src="../../../../assets/3582365.jpg" />
+    <div class="empty-state__message">No Data Found</div>
+  </div> -->
+</ion-content>

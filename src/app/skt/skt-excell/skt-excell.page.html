@@ -1,0 +1,77 @@
+<ion-header>
+  <ion-toolbar mode="md" style="--background: #cac2c2">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-row>
+      <ion-col size="10">
+        <ion-title>Students Uploader</ion-title>
+      </ion-col>
+      <ion-col size="2" class="tooltip">
+        <ion-fab-button size="small" class="fab-btn"
+          href="https://kingstrackimages.s3.ap-southeast-1.amazonaws.com/EsimExcelDowmload/StudentDetailUpload.xlsx"
+          download="sample.xlsx">
+          <div class="excel-wrapper" title="Excel-Format"></div>
+        </ion-fab-button>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="excelform">
+    <ion-list>
+      <ion-radio-group [value]="radioSelection" (ionChange)="selectPickDrop($event)">
+        <ion-row>
+          <ion-col size="4">
+            <ion-item style="--inner-border-width: 0; --min-height: 20px; padding: 0px">
+              <ion-label>New Vehicle Student</ion-label>
+              <ion-radio value="New" slot="start" checked></ion-radio>
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="4">
+            <ion-item style="--inner-border-width: 0; --min-height: 20px; padding: 0px">
+              <ion-label>Old Vehicle Student</ion-label>
+              <ion-radio value="Old" slot="start"></ion-radio>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="show" style="padding: 10px">
+          <ion-col size="12" size-lg="2.4" size-md="2.4">
+            <ion-label class="label-head">Pickup Route:</ion-label>
+            <ionic-selectable class="input selectable-input" placeholder="Select the Pickup Spot"
+              formControlName="pickup" [items]="Pickuplist" [canSearch]="true" [hasVirtualScroll]="true">
+            </ionic-selectable>
+          </ion-col>
+          <ion-col size="12" size-lg="2.4" size-md="2.4">
+            <ion-label class="label-head">Drop Route:</ion-label>
+            <ionic-selectable class="input selectable-input" placeholder="Select the Drop Spot" formControlName="drop"
+              [items]="Droplist" [canSearch]="true" [hasVirtualScroll]="true">
+            </ionic-selectable>
+          </ion-col>
+          <ion-col size="12" size-lg="2.4" size-md="2.4">
+            <input class="documents" type="file" (change)="onFileChange($event)" formControlName="fileupload" />
+          </ion-col>
+
+          <ion-col size="12" size-lg="2.4" size-md="2.4" style="margin: 17px 0px 0px; text-align: end">
+            <ion-button (click)="sendToServer()" [disabled]="fileuploads" id="submitbtn">Upload
+            </ion-button>
+            <ion-button (click)="clear()" id="submitbtn"> Clear</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-radio-group>
+    </ion-list>
+    <ion-row *ngIf="!show" style="padding: 10px">
+      <ion-col style="display: flex; justify-content: end">
+        <input style="margin-top: 9px" type="file" (change)="onFileChange($event)" formControlName="fileupload" />
+      </ion-col>
+
+      <ion-col>
+        <ion-button (click)="sendToServer()" [disabled]="fileuploads" id="submitbtn">Upload
+        </ion-button>
+        <ion-button (click)="clear()" id="submitbtn"> Clear</ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>

@@ -1,0 +1,345 @@
+<ion-header>
+  <ion-toolbar class="dealerHeader">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons
+      *ngIf="myPlatform == 'desktop'&&companyId == 'apm-sa'"
+      slot="start"
+    >
+      <ion-icon
+        routerLink="/tabs-login/esim-dashboard"
+        name="arrow-back"
+        style="padding: 10px; cursor: pointer"
+        slot="start"
+      ></ion-icon>
+    </ion-buttons>
+    <ion-title>Esim Dashboard</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row
+    style="display: flex; justify-content: center"
+    *ngIf="companyId == 'apm-sa'"
+    ><h4 style="color: #92a0b3">eSim Manufacture</h4>
+  </ion-row>
+  <ion-row
+    *ngIf="companyId == 'apm-sa'"
+    style="margin-top: 15px; justify-content: center; align-items: center"
+  >
+    <div>
+      <smart-drop-down-list
+        (change)="daysDropDownClick($event,'sensorise')"
+        [dropDownPosition]="'bottom'"
+        #daysDropDown1
+        [selectedIndexes]="[0]"
+      >
+        <smart-list-item [value]="'currentmonth'"
+          >Current Month</smart-list-item
+        >
+        <smart-list-item [value]="'lastmonth'">Last Month</smart-list-item>
+        <smart-list-item [value]="'currentyear'">Current Year</smart-list-item>
+        <smart-list-item [value]="'customrange'">Custom Range</smart-list-item>
+      </smart-drop-down-list>
+    </div>
+
+    <div *ngIf="endisDate">
+      <ion-input [(ngModel)]="sendoriseFromD" type="date" class="input">
+        <span style="color: Blue; margin-left: 5px">From Date:</span>
+      </ion-input>
+    </div>
+    <div *ngIf="endisDate">
+      <ion-input [(ngModel)]="sendoriseToD" type="date" class="input">
+        <span style="color: Blue; margin-left: 5px">To Date:</span>
+      </ion-input>
+    </div>
+    <div>
+      <ion-button
+        (click)="Submit('sensorise')"
+        size="small"
+        [disabled]="sendoriseFromD == undefined||sendoriseToD == undefined"
+        *ngIf="endisDate"
+        class="Akash"
+        >Submit</ion-button
+      >
+    </div>
+  </ion-row>
+
+  <ion-row style="display: flex; justify-content: center; align-items: center">
+    <div [ngStyle]="{'width':myPlatform == 'desktop' && '47%'}">
+      <ion-card *ngFor="let name of barRender">
+        <app-dealer-stacked-chart
+          *ngIf="companyId == 'apm-sa'"
+          [barName]="name"
+          [toDate]="toDate"
+          [fromDate]="fromDate"
+          [days]="days"
+          [dealerName]="dealerName"
+          [header]="name"
+        ></app-dealer-stacked-chart>
+      </ion-card>
+    </div>
+    <div [ngStyle]="{'width':myPlatform == 'desktop' && '47%'}">
+      <ion-card *ngFor="let name of barRender">
+        <app-dealer-stacked-chart
+          *ngIf="endis&&companyId == 'apm-sa'"
+          [barName]="'Device Mapped Details'"
+          [toDate]="toDate"
+          [fromDate]="fromDate"
+          [dealerName]="dealerName"
+          [days]="days"
+          [header]="name"
+        ></app-dealer-stacked-chart>
+      </ion-card>
+    </div>
+  </ion-row>
+
+  <ion-card *ngIf="companyId != 'apm-sa'">
+    <ion-card-title
+      style="
+        display: flex;
+        margin-top: 20px;
+        justify-content: center;
+        align-items: center;
+        color: #92a0b3;
+      "
+      >Purchase Dashboard</ion-card-title
+    >
+    <ion-row
+      style="
+        margin-top: 3%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      "
+    >
+      <div>
+        <smart-drop-down-list
+          (change)="daysDropDownClick($event,'purchase')"
+          [dropDownPosition]="'bottom'"
+          #daysDropDown2
+          [selectedIndexes]="[0]"
+        >
+          <smart-list-item value="currentmonth">Current Month</smart-list-item>
+          <smart-list-item value="lastmonth">Last Month</smart-list-item>
+          <smart-list-item value="currentyear">Current Year</smart-list-item>
+          <smart-list-item value="customrange">Custom Range</smart-list-item>
+        </smart-drop-down-list>
+      </div>
+
+      <div *ngIf="endisDatePurchase">
+        <ion-input [(ngModel)]="purchaseFrom" type="date" class="input">
+          <span style="color: Blue; margin-left: 5px">From Date:</span>
+        </ion-input>
+      </div>
+      <div *ngIf="endisDatePurchase">
+        <ion-input [(ngModel)]="purchaseTo" type="date" class="input">
+          <span style="color: Blue; margin-left: 5px">To Date:</span>
+        </ion-input>
+      </div>
+      <div>
+        <ion-button
+          (click)="Submit('purchase')"
+          [disabled]="purchaseFrom == undefined||purchaseTo == undefined"
+          *ngIf="endisDatePurchase"
+          size="1"
+          size="small"
+          class="Akash"
+          >Submit</ion-button
+        >
+      </div>
+    </ion-row>
+
+    <ion-row>
+      <ion-col style="margin-left: 14%; margin-top: 1%"
+        >Total Count: {{deviceTotalPurchaseCounts?.totalpurchased}}</ion-col
+      >
+      <ion-col style="margin-left: 14%; margin-top: 1%"
+        >Activated Count: {{deviceTotalPurchaseCounts?.totalactivated}}</ion-col
+      >
+    </ion-row>
+
+    <app-dealer-stacked-chart
+      [barName]="'Device Purchased'"
+      [dealerName]="dealerNamePurchase"
+      [header]="'Device Purchased'"
+      [toDate]="toDatePurchase"
+      [fromDate]="fromDatePurchase"
+      (deviceTotalPurchaseCount)="deviceTotalPurchaseCount($event)"
+      [days]="purchasedays"
+    >
+    </app-dealer-stacked-chart>
+  </ion-card>
+
+  <ion-card *ngIf="companyId == 'apm-sa'">
+    <ion-card-title
+      style="
+        display: flex;
+        margin-top: 20px;
+        justify-content: center;
+        align-items: center;
+        color: #92a0b3;
+      "
+      >Sales Dashboard</ion-card-title
+    >
+    <ion-row
+      style="
+        margin-top: 3%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      "
+    >
+      <div>
+        <smart-drop-down-list
+          (change)="daysDropDownClick($event,'sales')"
+          [dropDownPosition]="'bottom'"
+          #daysDropDown3
+          [selectedIndexes]="[0]"
+        >
+          <smart-list-item value="currentmonth">Current Month</smart-list-item>
+          <smart-list-item value="lastmonth">Last Month</smart-list-item>
+          <smart-list-item value="currentyear">Current Year</smart-list-item>
+          <smart-list-item value="customrange">Custom Range</smart-list-item>
+        </smart-drop-down-list>
+      </div>
+      <div>
+        <smart-drop-down-list
+          (change)="selectDealer($event,'sales')"
+          class="drop-down-list-modes-demo"
+          [dataSource]="data"
+          [placeholder]="'Select Dealer'"
+          [filterable]="true"
+          [dropDownPosition]="'bottom'"
+          #dropdownlistDealer1
+        >
+        </smart-drop-down-list>
+      </div>
+      <div *ngIf="endisDateSales">
+        <ion-input [(ngModel)]="salesFrom" type="date" class="input">
+          <span style="color: Blue; margin-left: 5px">From Date:</span>
+        </ion-input>
+      </div>
+      <div *ngIf="endisDateSales">
+        <ion-input [(ngModel)]="salesTo" type="date" class="input">
+          <span style="color: Blue; margin-left: 5px">To Date:</span>
+        </ion-input>
+      </div>
+      <div *ngIf="endisDateSales">
+        <ion-button
+          (click)="Submit('sales')"
+          [disabled]="salesFrom == undefined ||salesTo == undefined"
+          size="small"
+          class="Akash"
+          >Submit</ion-button
+        >
+      </div>
+    </ion-row>
+    <ion-row>
+      <ion-col style="margin-left: 14%; margin-top: 1%"
+        >Total Count: {{deviceTotalActivatedCounts?.totalsales}}</ion-col
+      >
+      <ion-col style="margin-left: 14%; margin-top: 1%"
+        >Activated Count:
+        {{deviceTotalActivatedCounts?.totalactivated}}</ion-col
+      >
+    </ion-row>
+
+    <app-dealer-stacked-chart
+      [dealerName]="dealerNameSales"
+      (deviceTotalActivatedCount)="deviceTotalActivatedCount($event)"
+      [barName]="'Device Sales'"
+      [toDate]="toDateSales"
+      [days]="salsedays"
+      [fromDate]="fromDateSales"
+      [header]="'Device Sales'"
+    ></app-dealer-stacked-chart>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-title
+      style="
+        display: flex;
+        margin-top: 20px;
+        justify-content: center;
+        align-items: center;
+        color: #92a0b3;
+      "
+      >Renewal Dashboard</ion-card-title
+    >
+    <ion-row
+      style="
+        margin-top: 3%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      "
+    >
+      <div>
+        <smart-drop-down-list
+          (change)="daysDropDownClick($event,'renewal')"
+          [dropDownPosition]="'bottom'"
+          #daysDropDown4
+          [selectedIndexes]="[0]"
+        >
+          <smart-list-item value="currentmonth">Current Month</smart-list-item>
+          <smart-list-item value="lastmonth">Last Month</smart-list-item>
+          <smart-list-item value="currentyear">Current Year</smart-list-item>
+          <smart-list-item value="customrange">Custom Range</smart-list-item>
+        </smart-drop-down-list>
+      </div>
+
+      <div *ngIf="companyId == 'apm-sa'">
+        <smart-drop-down-list
+          [dataSource]="data"
+          (change)="selectDealer($event,'renewal')"
+          class="drop-down-list-modes-demo"
+          [placeholder]="'Select Dealer'"
+          [filterable]="true"
+          [dropDownPosition]="'bottom'"
+          #dropdownlistDealer2
+        >
+        </smart-drop-down-list>
+      </div>
+
+      <div *ngIf="endisDateRenewal">
+        <ion-input [(ngModel)]="RenewalFrom" type="date" class="input">
+          <span style="color: Blue; margin-left: 5px">From Date:</span>
+        </ion-input>
+      </div>
+      <div *ngIf="endisDateRenewal">
+        <ion-input [(ngModel)]="RenewalTo" type="date" class="input">
+          <span style="color: Blue; margin-left: 5px">To Date:</span>
+        </ion-input>
+      </div>
+      <div *ngIf="endisDateRenewal">
+        <ion-button
+          (click)="Submit('renewal')"
+          [disabled]="RenewalFrom == undefined || RenewalTo == undefined"
+          size="small"
+          class="Akash"
+          >Submit</ion-button
+        >
+      </div>
+    </ion-row>
+
+    <ion-row>
+      <ion-col style="margin-left: 14%; margin-top: 1%"
+        >Total Count: {{this.endis.totalrenewalcount}}</ion-col
+      >
+      <ion-col style="margin-left: 14%; margin-top: 1%"
+        >Activated Count: {{this.endis.totalrenewalactivecount}}</ion-col
+      >
+    </ion-row>
+    <app-dealer-stacked-chart
+      (endisMappedDevice)="endisMapedDevice($event)"
+      [barName]="'Device Renewal'"
+      [dealerName]="dealerNameRenewal"
+      [toDate]="toDateRenewal"
+      [fromDate]="fromDateRenewal"
+      [header]="'Device Renewal'"
+      [days]="renewaldays"
+    ></app-dealer-stacked-chart>
+  </ion-card>
+</ion-content>

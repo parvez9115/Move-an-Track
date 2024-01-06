@@ -1,0 +1,18 @@
+.bg{
+    height: 100vh;
+    display: -webkit-box;
+    display: flex;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    font-family: "Roboto";
+    font-size: xx-large;
+}
+img{
+    height: 20%;
+}
+p{
+    color: #0495aa;
+}

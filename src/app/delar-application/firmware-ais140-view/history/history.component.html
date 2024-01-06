@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar mode="md" class="dealerHeader">
+    <ion-buttons slot="start">
+      <ion-icon
+        (click)="cancelBtn()"
+        name="arrow-back"
+        style="padding: 10px"
+        slot="start"
+      ></ion-icon>
+    </ion-buttons>
+    <ion-title>History</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row style="margin-top: 10px;">
+    <ion-col>
+      <jqxGrid #myGrid [theme]="'material'" (onRowclick)="myGridOnRowSelect($event)" [width]="'99%'" [autoheight]="true"
+        [enablebrowserselection]="true" [source]="dataAdapter" [sortable]="true" [filterable]="true" [columns]="columns"
+        [columnsresize]="true" [enabletooltips]="true" [pageable]="true" [showfilterrow]="true" style="
+            font-size: 16px;
+            text-align: center !important;
+            margin: auto;
+            cursor: pointer;
+          ">
+      </jqxGrid>
+    </ion-col>
+  </ion-row>
+</ion-content>

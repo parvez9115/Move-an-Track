@@ -1,0 +1,119 @@
+<ion-header>
+  <ion-toolbar mode="md" class="dealerHeader">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-row class="toolbar">
+      <ion-col size="8">
+        <ion-title>Firmware AIS140 Upload</ion-title>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row
+    class="wrapper-container"
+    style="
+      width: fit-content;
+      margin-top: 5%;
+      margin-left: 25%;
+      margin-right: 25%;
+    "
+  >
+    <ion-col>
+      <form [formGroup]="firmware">
+        <ion-row>
+          <ion-col style="border: 2px solid #777777; width: 50%">
+            <ion-row
+              class="form-field"
+              style="justify-content: center; margin-top: 5%; display: flex"
+            >
+              <ion-col>
+                <ion-label class="label-head">State :</ion-label>
+                <ionic-selectable
+                  class="input selectable-input"
+                  formControlName="state"
+                  placeholder="Select the State"
+                  [items]="state"
+                  [canSearch]="true"
+                  [hasVirtualScroll]="true"
+                >
+                </ionic-selectable>
+              </ion-col>
+
+              <ion-col>
+                <ion-label class="label-head">Service Provider :</ion-label>
+                <ionic-selectable
+                  class="input selectable-input"
+                  formControlName="serviceprovider"
+                  placeholder="Select the Provider"
+                  [items]="service"
+                  [canSearch]="true"
+                  [hasVirtualScroll]="true"
+                  [disabledItems]="data"
+                >
+                </ionic-selectable>
+              </ion-col>
+            </ion-row>
+
+            <ion-row class="form-field" style="justify-content: center">
+              <ion-col>
+                <ion-label class="label-head">Back End Server :</ion-label>
+                <ionic-selectable
+                  class="input selectable-input"
+                  formControlName="server"
+                  placeholder="Select the Server"
+                  [items]="backendserver"
+                  [canSearch]="true"
+                  [hasVirtualScroll]="true"
+                  [disabledItems]="data"
+                >
+                </ionic-selectable>
+              </ion-col>
+
+              <ion-col style="width: 30px">
+                <ion-label class="label-head">File Upload:</ion-label>
+                <input
+                  type="file"
+                  formControlName="fileupload"
+                  class="documents"
+                  ng2FileSelect
+                  [uploader]="uploader"
+                />
+              </ion-col>
+            </ion-row>
+
+            <ion-row class="form-field" style="justify-content: center">
+              <ion-col style="display: grid">
+                <ion-label class="label-head" style="padding: 5px"
+                  >Reason :</ion-label
+                >
+                <textarea
+                  class="reason"
+                  type="text"
+                  placeholder="Enter the Reason"
+                  formControlName="reason"
+                ></textarea>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col style="text-align: center">
+                <ion-button
+                  class="submitbtn"
+                  (click)="popup()"
+                  [disabled]="!firmware.valid || button"
+                  >Submit</ion-button
+                >
+                <ion-button class="submitbtn" (click)="clear()"
+                  >Clear</ion-button
+                >
+              </ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </form>
+    </ion-col>
+  </ion-row>
+</ion-content>

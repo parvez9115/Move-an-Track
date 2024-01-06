@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar mode="md" class="dealerHeader">
+    <ion-buttons slot="start">
+      <ion-icon
+        (click)="cancelBtn()"
+        name="arrow-back"
+        style="padding: 10px"
+        slot="start"
+      ></ion-icon>
+    </ion-buttons>
+    <ion-title>Bus Stop Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row
+    ><ion-col
+      ><jqxGrid
+        [pageable]="true"
+        [selectionmode]="'singlerow'"
+        [filterable]="true"
+        [showfilterrow]="true"
+        [sortable]="true"
+        [width]="'100%'"
+        [source]="dataAdapter"
+        [columns]="columns"
+        [autoheight]="true"
+        [theme]="'material'"
+        #myGrid
+        style="font-size: 16px; text-align: center !important"
+      >
+      </jqxGrid></ion-col
+  ></ion-row>
+
+  <ion-row>
+    <ion-col style="text-align: center">
+      <ion-button
+        color="primary"
+        size="small"
+        class="table-btn"
+        (click)="submit()"
+        >Submit</ion-button
+      >
+      <ion-button
+        color="primary"
+        size="small"
+        class="table-btn"
+        (click)="cancelBtn()"
+        >Cancel</ion-button
+      >
+    </ion-col>
+  </ion-row>
+</ion-content>

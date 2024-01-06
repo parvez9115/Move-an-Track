@@ -1,0 +1,1621 @@
+<ion-header>
+  <ion-toolbar class="dealerHeader">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons *ngIf="myPlatform == 'desktop'" slot="start">
+      <ion-icon
+        routerLink="/tabs-login/esim-dashboard"
+        name="arrow-back"
+        style="padding: 10px; cursor: pointer"
+        slot="start"
+      ></ion-icon>
+    </ion-buttons>
+    <ion-title>Device Status Update</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row *ngIf="myPlatform != 'desktop'" class="tabrow">
+    <ion-col class="form-field">
+      <ion-row class="form-field">
+        <div class="wrap">
+          <button
+            (click)="getdatas('6'); clear()"
+            [ngClass]="{nexttab:true,select:tab == '6'}"
+            size="2.5"
+          >
+            CA
+          </button>
+        </div>
+        <div class="wrap">
+          <button
+            (click)="getdatas('1');clear()"
+            [ngClass]="{nexttab:true,select:tab=='1'}"
+            size="2.5"
+          >
+            Renewal 1
+          </button>
+        </div>
+        <div class="wrap">
+          <button
+            (click)="getdatas('2');clear()"
+            [ngClass]="{nexttab:true,select:tab=='2'}"
+            size="2.5"
+          >
+            Renewal 2
+          </button>
+        </div>
+
+        <div class="wrap">
+          <button
+            (click)="getdatas('3');clear()"
+            [ngClass]="{nexttab:true,select:tab=='3'}"
+            size="2.5"
+          >
+            Renewal 3
+          </button>
+        </div>
+
+        <div class="wrap">
+          <button
+            (click)="getdatas('4');clear()"
+            [ngClass]="{nexttab:true,select:tab=='4'}"
+            size="2.5"
+          >
+            Renewal 4
+          </button>
+        </div>
+
+        <div class="wrap">
+          <button
+            (click)="getdatas('5');clear()"
+            [ngClass]="{nexttab:true,select:tab=='5'}"
+            size="2.5"
+          >
+            Renewal 5
+          </button>
+        </div>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+
+  <ion-row *ngIf="myPlatform == 'desktop'" class="tabrow">
+    <ion-col>
+      <ion-row>
+        <div class="wrap">
+          <button
+            (click)="getdatas('6'); clear()"
+            [ngClass]="{nexttab:true,select:tab == '6'}"
+          >
+            CA
+          </button>
+        </div>
+        <div class="wrap">
+          <button
+            (click)="getdatas('1');clear()"
+            [ngClass]="{nexttab:true,select:tab=='1'}"
+          >
+            Renewal 1
+          </button>
+        </div>
+        <div class="wrap">
+          <button
+            (click)="getdatas('2');clear()"
+            [ngClass]="{nexttab:true,select:tab=='2'}"
+          >
+            Renewal 2
+          </button>
+        </div>
+
+        <div class="wrap">
+          <button
+            (click)="getdatas('3');clear()"
+            [ngClass]="{nexttab:true,select:tab=='3'}"
+          >
+            Renewal 3
+          </button>
+        </div>
+
+        <div class="wrap">
+          <button
+            (click)="getdatas('4');clear()"
+            [ngClass]="{nexttab:true,select:tab=='4'}"
+          >
+            Renewal 4
+          </button>
+        </div>
+
+        <div class="wrap">
+          <button
+            (click)="getdatas('5');clear()"
+            [ngClass]="{nexttab:true,select:tab=='5'}"
+          >
+            Renewal 5
+          </button>
+        </div>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+
+  <!-- mobile view start -->
+  <!-- ionic card -->
+  <ion-row *ngIf="myPlatform != 'desktop'" class="form-field">
+    <ion-col>
+      <form *ngIf="tab == 6" [formGroup]="castatusform">
+        <ion-card class="cardCenter">
+          <ion-card-content style="margin-top: -10px">
+            <ion-row
+              ><ion-col size="10"
+                ><ion-card-subtitle
+                  >CA Status Update:</ion-card-subtitle
+                ></ion-col
+              >
+
+              <ion-col class="tooltipca" size="2">
+                <ion-fab-button
+                  size="small"
+                  class="fab-btnmbl"
+                  href="https://kingstrackimages.s3.ap-southeast-1.amazonaws.com/EsimExcelDowmload/CACardStatusUpdate.xlsx"
+                  download="sample.xlsx"
+                >
+                  <div class="excel-wrapper"></div>
+                </ion-fab-button>
+                <span class="tooltipcatext">CA Status Update</span>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col style="margin-top: 5px">
+                <input
+                  type="file"
+                  (change)="onFileChange($event)"
+                  formControlName="castatusupdate"
+                />
+              </ion-col>
+            </ion-row>
+            <ion-row style="text-align: center">
+              <ion-col>
+                <ion-button
+                  size="small"
+                  (click)="sendToServer()"
+                  id="submitbtn"
+                  [disabled]="!castatusform.valid"
+                  >Submit
+                </ion-button>
+                <ion-button
+                  type="reset"
+                  (click)="cardclear()"
+                  size="small"
+                  id="submitbtn"
+                  >Clear
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </form>
+
+      <form *ngIf="tab == 1" [formGroup]="renewalstatusupdateone">
+        <ion-card class="cardCenter">
+          <ion-card-content style="margin-top: -10px">
+            <ion-row
+              ><ion-col size="10"
+                ><ion-card-subtitle
+                  >Renewal Status 1 Update:</ion-card-subtitle
+                ></ion-col
+              >
+
+              <ion-col class="tooltipca" size="2">
+                <ion-fab-button
+                  size="small"
+                  class="fab-btnmbl"
+                  href="https://kingstrackimages.s3.ap-southeast-1.amazonaws.com/EsimExcelDowmload/RenewalCardStatusUpdate.xlsx"
+                  download="sample.xlsx"
+                >
+                  <div class="excel-wrapper"></div>
+                </ion-fab-button>
+                <span class="tooltipcatext">Renewal Status Update</span>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col
+                size="12"
+                size-sm="12"
+                size-lg="6"
+                style="margin-top: 5px"
+                size-md="12"
+              >
+                <input
+                  type="file"
+                  (change)="onFileChange($event,'status update')"
+                  formControlName="renewalstatusone"
+                />
+              </ion-col>
+            </ion-row>
+            <ion-row style="text-align: center">
+              <ion-col>
+                <ion-button
+                  size="small"
+                  (click)="sendToServer('status update',1)"
+                  id="submitbtn"
+                  [disabled]="!renewalstatusupdateone.valid"
+                  >Submit
+                </ion-button>
+                <ion-button
+                  type="reset"
+                  (click)="cardclear()"
+                  size="small"
+                  id="submitbtn"
+                  >Clear
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </form>
+
+      <form *ngIf="tab == 2" [formGroup]="renewalstatusupdatetwo">
+        <ion-card class="cardCenter">
+          <ion-card-content style="margin-top: -10px">
+            <ion-row
+              ><ion-col size="10"
+                ><ion-card-subtitle
+                  >Renewal Status 2 Update:</ion-card-subtitle
+                ></ion-col
+              >
+
+              <ion-col class="tooltipca" size="2">
+                <ion-fab-button
+                  size="small"
+                  class="fab-btnmbl"
+                  href="https://kingstrackimages.s3.ap-southeast-1.amazonaws.com/EsimExcelDowmload/RenewalCardStatusUpdate.xlsx"
+                  download="sample.xlsx"
+                >
+                  <div class="excel-wrapper"></div>
+                </ion-fab-button>
+                <span class="tooltipcatext">Renewal Status Update</span>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col style="margin-top: 5px">
+                <input
+                  type="file"
+                  (change)="onFileChange($event,'status update')"
+                  formControlName="renewalstatustwo"
+                />
+              </ion-col>
+            </ion-row>
+            <ion-row style="text-align: center">
+              <ion-col>
+                <ion-button
+                  size="small"
+                  (click)="sendToServer('status update',2)"
+                  id="submitbtn"
+                  [disabled]="!renewalstatusupdatetwo.valid"
+                  >Submit
+                </ion-button>
+                <ion-button
+                  type="reset"
+                  (click)="cardclear()"
+                  size="small"
+                  id="submitbtn"
+                  >Clear
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </form>
+
+      <form *ngIf="tab == 3" [formGroup]="renewalstatusupdatethree">
+        <ion-card class="cardCenter">
+          <ion-card-content style="margin-top: -10px">
+            <ion-row
+              ><ion-col size="10"
+                ><ion-card-subtitle
+                  >Renewal Status 3 Update:</ion-card-subtitle
+                ></ion-col
+              >
+
+              <ion-col class="tooltipca" size="2">
+                <ion-fab-button
+                  size="small"
+                  class="fab-btnmbl"
+                  href="https://kingstrackimages.s3.ap-southeast-1.amazonaws.com/EsimExcelDowmload/RenewalCardStatusUpdate.xlsx"
+                  download="sample.xlsx"
+                >
+                  <div class="excel-wrapper"></div>
+                </ion-fab-button>
+                <span class="tooltipcatext">Renewal Status Update</span>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col style="margin-top: 5px">
+                <input
+                  type="file"
+                  (change)="onFileChange($event,'status update')"
+                  formControlName="renewalstatusthree"
+                />
+              </ion-col>
+            </ion-row>
+            <ion-row style="text-align: center">
+              <ion-col>
+                <ion-button
+                  size="small"
+                  (click)="sendToServer('status update',3)"
+                  id="submitbtn"
+                  [disabled]="!renewalstatusupdatethree.valid"
+                  >Submit
+                </ion-button>
+                <ion-button
+                  type="reset"
+                  (click)="cardclear()"
+                  size="small"
+                  id="submitbtn"
+                  >Clear
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </form>
+
+      <form *ngIf="tab == 4" [formGroup]="renewalstatusupdatefour">
+        <ion-card class="cardCenter">
+          <ion-card-content style="margin-top: -10px">
+            <ion-row
+              ><ion-col size="10"
+                ><ion-card-subtitle
+                  >Renewal Status 4 Update:</ion-card-subtitle
+                ></ion-col
+              >
+
+              <ion-col class="tooltipca" size="2">
+                <ion-fab-button
+                  size="small"
+                  class="fab-btnmbl"
+                  href="https://kingstrackimages.s3.ap-southeast-1.amazonaws.com/EsimExcelDowmload/RenewalCardStatusUpdate.xlsx"
+                  download="sample.xlsx"
+                >
+                  <div class="excel-wrapper"></div>
+                </ion-fab-button>
+                <span class="tooltipcatext">Renewal Status Update</span>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col style="margin-top: 5px">
+                <input
+                  type="file"
+                  (change)="onFileChange($event,'status update')"
+                  formControlName="renewalstatusfour"
+                />
+              </ion-col>
+            </ion-row>
+            <ion-row style="text-align: center">
+              <ion-col>
+                <ion-button
+                  size="small"
+                  (click)="sendToServer('status update',4)"
+                  id="submitbtn"
+                  [disabled]="!renewalstatusupdatefour.valid"
+                  >Submit
+                </ion-button>
+                <ion-button
+                  type="reset"
+                  (click)="cardclear()"
+                  size="small"
+                  id="submitbtn"
+                  >Clear
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </form>
+
+      <form *ngIf="tab == 5" [formGroup]="renewalstatusupdatefive">
+        <ion-card class="cardCenter">
+          <ion-card-content style="margin-top: -10px">
+            <ion-row
+              ><ion-col size="10"
+                ><ion-card-subtitle
+                  >Renewal Status 5 Update:</ion-card-subtitle
+                ></ion-col
+              >
+
+              <ion-col class="tooltipca" size="2">
+                <ion-fab-button
+                  size="small"
+                  class="fab-btnmbl"
+                  href="https://kingstrackimages.s3.ap-southeast-1.amazonaws.com/EsimExcelDowmload/RenewalCardStatusUpdate.xlsx"
+                  download="sample.xlsx"
+                >
+                  <div class="excel-wrapper"></div>
+                </ion-fab-button>
+                <span class="tooltipcatext">Renewal Status Update</span>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col style="margin-top: 5px">
+                <input
+                  type="file"
+                  (change)="onFileChange($event,'status update')"
+                  formControlName="renewalstatusfive"
+                />
+              </ion-col>
+            </ion-row>
+            <ion-row style="text-align: center">
+              <ion-col>
+                <ion-button
+                  size="small"
+                  (click)="sendToServer('status update',5)"
+                  id="submitbtn"
+                  [disabled]="!renewalstatusupdatefive.valid"
+                  >Submit
+                </ion-button>
+                <ion-button
+                  type="reset"
+                  (click)="cardclear()"
+                  size="small"
+                  id="submitbtn"
+                  >Clear
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </form>
+    </ion-col>
+  </ion-row>
+  <!-- ionic card -->
+  <ion-row *ngIf="myPlatform != 'desktop'" class="form-field">
+    <ion-col>
+      <form *ngIf="tab == 6" [formGroup]="cacommentform">
+        <ion-card class="cardCenter">
+          <ion-card-content style="margin-top: -10px">
+            <ion-row
+              ><ion-col size="10"
+                ><ion-card-subtitle
+                  >CA Comment Update:</ion-card-subtitle
+                ></ion-col
+              >
+
+              <ion-col class="tooltipca" size="2">
+                <ion-fab-button
+                  size="small"
+                  class="fab-btnmbl"
+                  href="https://kingstrackimages.s3.ap-southeast-1.amazonaws.com/EsimExcelDowmload/CACommentUpdate.xlsx"
+                  download="sample.xlsx"
+                >
+                  <div class="excel-wrapper"></div>
+                </ion-fab-button>
+                <span class="tooltipcatext">CA comment Update</span>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col style="margin-top: 5px">
+                <input
+                  type="file"
+                  (change)="onFileChange($event,'ca')"
+                  formControlName="cacommentupdate"
+                />
+              </ion-col>
+            </ion-row>
+            <ion-row style="text-align: center">
+              <ion-col>
+                <ion-button
+                  size="small"
+                  (click)="sendToServer('ca')"
+                  id="submitbtn"
+                  [disabled]="!cacommentform.valid"
+                  >Submit
+                </ion-button>
+                <ion-button
+                  type="reset"
+                  (click)="cardclear1()"
+                  size="small"
+                  id="submitbtn"
+                  >Clear
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </form>
+
+      <form *ngIf="tab == 1" [formGroup]="renewalcommentupdateone">
+        <ion-card class="cardCenter">
+          <ion-card-content style="margin-top: -10px">
+            <ion-row
+              ><ion-col size="10"
+                ><ion-card-subtitle
+                  >Renewal comment 1 Update:</ion-card-subtitle
+                ></ion-col
+              >
+
+              <ion-col class="tooltipca" size="2">
+                <ion-fab-button
+                  size="small"
+                  class="fab-btnmbl"
+                  href="https://kingstrackimages.s3.ap-southeast-1.amazonaws.com/EsimExcelDowmload/RenewalCommentUpdate.xlsx"
+                  download="sample.xlsx"
+                >
+                  <div class="excel-wrapper"></div>
+                </ion-fab-button>
+                <span class="tooltipcatext">Renewal comment Update</span>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col style="margin-top: 5px">
+                <input
+                  type="file"
+                  (change)="onFileChange($event,'comment update')"
+                  formControlName="renewalcommentone"
+                />
+              </ion-col>
+            </ion-row>
+            <ion-row style="text-align: center">
+              <ion-col>
+                <ion-button
+                  size="small"
+                  (click)="sendToServer('comment update',1)"
+                  id="submitbtn"
+                  [disabled]="!renewalcommentupdateone.valid"
+                  >Submit
+                </ion-button>
+                <ion-button
+                  type="reset"
+                  (click)="cardclear1()"
+                  size="small"
+                  id="submitbtn"
+                  >Clear
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </form>
+
+      <form *ngIf="tab == 2" [formGroup]="renewalcommentupdatetwo">
+        <ion-card class="cardCenter">
+          <ion-card-content style="margin-top: -10px">
+            <ion-row
+              ><ion-col size="10"
+                ><ion-card-subtitle
+                  >Renewal comment 2 Update:</ion-card-subtitle
+                ></ion-col
+              >
+
+              <ion-col class="tooltipca" size="2">
+                <ion-fab-button
+                  size="small"
+                  class="fab-btnmbl"
+                  href="https://kingstrackimages.s3.ap-southeast-1.amazonaws.com/EsimExcelDowmload/RenewalCommentUpdate.xlsx"
+                  download="sample.xlsx"
+                >
+                  <div class="excel-wrapper"></div>
+                </ion-fab-button>
+                <span class="tooltipcatext">Renewal comment Update</span>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col style="margin-top: 5px">
+                <input
+                  type="file"
+                  (change)="onFileChange($event,'comment update')"
+                  formControlName="renewalcommenttwo"
+                />
+              </ion-col>
+            </ion-row>
+            <ion-row style="text-align: center">
+              <ion-col>
+                <ion-button
+                  size="small"
+                  (click)="sendToServer('comment update',2)"
+                  id="submitbtn"
+                  [disabled]="!renewalcommentupdatetwo.valid"
+                  >Submit
+                </ion-button>
+                <ion-button
+                  type="reset"
+                  (click)="cardclear1()"
+                  size="small"
+                  id="submitbtn"
+                  >Clear
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </form>
+
+      <form *ngIf="tab == 3" [formGroup]="renewalcommentupdatethree">
+        <ion-card class="cardCenter">
+          <ion-card-content style="margin-top: -10px">
+            <ion-row
+              ><ion-col size="10"
+                ><ion-card-subtitle
+                  >Renewal comment 3 Update:</ion-card-subtitle
+                ></ion-col
+              >
+
+              <ion-col class="tooltipca" size="2">
+                <ion-fab-button
+                  size="small"
+                  class="fab-btnmbl"
+                  href="https://kingstrackimages.s3.ap-southeast-1.amazonaws.com/EsimExcelDowmload/RenewalCommentUpdate.xlsx"
+                  download="sample.xlsx"
+                >
+                  <div class="excel-wrapper"></div>
+                </ion-fab-button>
+                <span class="tooltipcatext">Renewal comment Update</span>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col style="margin-top: 5px">
+                <input
+                  type="file"
+                  (change)="onFileChange($event,'comment update')"
+                  formControlName="renewalcommentthree"
+                />
+              </ion-col>
+            </ion-row>
+            <ion-row style="text-align: center">
+              <ion-col>
+                <ion-button
+                  size="small"
+                  (click)="sendToServer('comment update',3)"
+                  id="submitbtn"
+                  [disabled]="!renewalcommentupdatethree.valid"
+                  >Submit
+                </ion-button>
+                <ion-button
+                  type="reset"
+                  (click)="cardclear1()"
+                  size="small"
+                  id="submitbtn"
+                  >Clear
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </form>
+
+      <form *ngIf="tab == 4" [formGroup]="renewalcommentupdatefour">
+        <ion-card class="cardCenter">
+          <ion-card-content style="margin-top: -10px">
+            <ion-row
+              ><ion-col size="10"
+                ><ion-card-subtitle
+                  >Renewal comment 4 Update:</ion-card-subtitle
+                ></ion-col
+              >
+
+              <ion-col class="tooltipca" size="2">
+                <ion-fab-button
+                  size="small"
+                  class="fab-btnmbl"
+                  href="https://kingstrackimages.s3.ap-southeast-1.amazonaws.com/EsimExcelDowmload/RenewalCommentUpdate.xlsx"
+                  download="sample.xlsx"
+                >
+                  <div class="excel-wrapper"></div>
+                </ion-fab-button>
+                <span class="tooltipcatext">Renewal comment Update</span>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col style="margin-top: 5px">
+                <input
+                  type="file"
+                  (change)="onFileChange($event,'comment update')"
+                  formControlName="renewalcommentfour"
+                />
+              </ion-col>
+            </ion-row>
+            <ion-row style="text-align: center">
+              <ion-col size="12" size-sm="12" size-lg="6" size-md="12">
+                <ion-button
+                  size="small"
+                  (click)="sendToServer('comment update',4)"
+                  id="submitbtn"
+                  [disabled]="!renewalcommentupdatefour.valid"
+                  >Submit
+                </ion-button>
+                <ion-button
+                  type="reset"
+                  (click)="cardclear1()"
+                  size="small"
+                  id="submitbtn"
+                  >Clear
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </form>
+
+      <form *ngIf="tab == 5" [formGroup]="renewalcommentupdatefive">
+        <ion-card class="cardCenter">
+          <ion-card-content style="margin-top: -10px">
+            <ion-row
+              ><ion-col size="10"
+                ><ion-card-subtitle
+                  >Renewal comment 5 Update:</ion-card-subtitle
+                ></ion-col
+              >
+
+              <ion-col class="tooltipca" size="2">
+                <ion-fab-button
+                  size="small"
+                  class="fab-btnmbl"
+                  href="https://kingstrackimages.s3.ap-southeast-1.amazonaws.com/EsimExcelDowmload/RenewalCommentUpdate.xlsx"
+                  download="sample.xlsx"
+                >
+                  <div class="excel-wrapper"></div>
+                </ion-fab-button>
+                <span class="tooltipcatext">Renewal comment Update</span>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col style="margin-top: 5px">
+                <input
+                  type="file"
+                  (change)="onFileChange($event,'comment update')"
+                  formControlName="renewalcommentfive"
+                />
+              </ion-col>
+            </ion-row>
+            <ion-row style="text-align: center">
+              <ion-col>
+                <ion-button
+                  size="small"
+                  (click)="sendToServer('comment update',5)"
+                  id="submitbtn"
+                  [disabled]="!renewalcommentupdatefive.valid"
+                  >Submit
+                </ion-button>
+                <ion-button
+                  type="reset"
+                  (click)="cardclear1()"
+                  size="small"
+                  id="submitbtn"
+                  >Clear
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </form>
+    </ion-col>
+  </ion-row>
+  <!-- ionic input -->
+  <ion-row class="form-field" *ngIf="myPlatform != 'desktop'">
+    <ion-col>
+      <form [formGroup]="statusform">
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label
+                position="floating"
+                style="color: blue; font-weight: lighter"
+              >
+                IMEI Number :</ion-label
+              >
+              <ion-input type="number" formControlName="imeino"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row style="text-align: center">
+          <ion-col>
+            <ion-button
+              (click)="Submit()"
+              id="submitbtn"
+              size="small"
+              [disabled]="!statusform.valid"
+              >Submit</ion-button
+            >
+
+            <ion-button
+              type="reset"
+              (click)="clear()"
+              size="small"
+              id="submitbtn"
+              >Clear</ion-button
+            >
+          </ion-col>
+        </ion-row>
+      </form>
+    </ion-col>
+  </ion-row>
+  <!-- mobile view end -->
+
+  <ion-row
+    *ngIf="myPlatform == 'desktop'"
+    class="form-field"
+    style="justify-content: end"
+  >
+    <ion-col size="6">
+      <form *ngIf="tab == 6" [formGroup]="castatusform">
+        <ion-card class="cardCenter">
+          <ion-card-content style="margin-top: -10px">
+            <ion-row
+              ><ion-col size="10"
+                ><ion-card-subtitle
+                  >CA Status Update:</ion-card-subtitle
+                ></ion-col
+              >
+
+              <ion-col class="tooltipca" size="2" style="margin-top: -10px">
+                <ion-fab-button
+                  size="small"
+                  class="fab-btn"
+                  href="https://kingstrackimages.s3.ap-southeast-1.amazonaws.com/EsimExcelDowmload/CACardStatusUpdate.xlsx"
+                  download="sample.xlsx"
+                >
+                  <div class="excel-wrapper"></div>
+                </ion-fab-button>
+                <span class="tooltipcatext">CA Status Update</span>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col
+                size="12"
+                size-sm="12"
+                size-lg="6"
+                style="margin-top: 5px"
+                size-md="12"
+              >
+                <input
+                  type="file"
+                  (change)="onFileChange($event)"
+                  formControlName="castatusupdate"
+                />
+              </ion-col>
+              <ion-col size="12" size-sm="12" size-lg="6" size-md="12">
+                <ion-button
+                  size="small"
+                  (click)="sendToServer()"
+                  id="submitbtn"
+                  [disabled]="!castatusform.valid"
+                  >Submit
+                </ion-button>
+                <ion-button
+                  type="reset"
+                  (click)="cardclear()"
+                  size="small"
+                  id="submitbtn"
+                  >Clear
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </form>
+
+      <form *ngIf="tab == 1" [formGroup]="renewalstatusupdateone">
+        <ion-card class="cardCenter">
+          <ion-card-content style="margin-top: -10px">
+            <ion-row
+              ><ion-col size="10"
+                ><ion-card-subtitle
+                  >Renewal Status 1 Update:</ion-card-subtitle
+                ></ion-col
+              >
+
+              <ion-col class="tooltipca" size="2" style="margin-top: -10px">
+                <ion-fab-button
+                  size="small"
+                  class="fab-btn"
+                  href="https://kingstrackimages.s3.ap-southeast-1.amazonaws.com/EsimExcelDowmload/RenewalCardStatusUpdate.xlsx"
+                  download="sample.xlsx"
+                >
+                  <div class="excel-wrapper"></div>
+                </ion-fab-button>
+                <span class="tooltipcatext">Renewal Status Update</span>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col
+                size="12"
+                size-sm="12"
+                size-lg="6"
+                style="margin-top: 5px"
+                size-md="12"
+              >
+                <input
+                  type="file"
+                  (change)="onFileChange($event,'status update')"
+                  formControlName="renewalstatusone"
+                />
+              </ion-col>
+              <ion-col size="12" size-sm="12" size-lg="6" size-md="12">
+                <ion-button
+                  size="small"
+                  (click)="sendToServer('status update',1)"
+                  id="submitbtn"
+                  [disabled]="!renewalstatusupdateone.valid"
+                  >Submit
+                </ion-button>
+                <ion-button
+                  type="reset"
+                  (click)="cardclear()"
+                  size="small"
+                  id="submitbtn"
+                  >Clear
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </form>
+
+      <form *ngIf="tab == 2" [formGroup]="renewalstatusupdatetwo">
+        <ion-card class="cardCenter">
+          <ion-card-content style="margin-top: -10px">
+            <ion-row
+              ><ion-col size="10"
+                ><ion-card-subtitle
+                  >Renewal Status 2 Update:</ion-card-subtitle
+                ></ion-col
+              >
+
+              <ion-col class="tooltipca" size="2" style="margin-top: -10px">
+                <ion-fab-button
+                  size="small"
+                  class="fab-btn"
+                  href="https://kingstrackimages.s3.ap-southeast-1.amazonaws.com/EsimExcelDowmload/RenewalCardStatusUpdate.xlsx"
+                  download="sample.xlsx"
+                >
+                  <div class="excel-wrapper"></div>
+                </ion-fab-button>
+                <span class="tooltipcatext">Renewal Status Update</span>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col
+                size="12"
+                size-sm="12"
+                size-lg="6"
+                style="margin-top: 5px"
+                size-md="12"
+              >
+                <input
+                  type="file"
+                  (change)="onFileChange($event,'status update')"
+                  formControlName="renewalstatustwo"
+                />
+              </ion-col>
+              <ion-col size="12" size-sm="12" size-lg="6" size-md="12">
+                <ion-button
+                  size="small"
+                  (click)="sendToServer('status update',2)"
+                  id="submitbtn"
+                  [disabled]="!renewalstatusupdatetwo.valid"
+                  >Submit
+                </ion-button>
+                <ion-button
+                  type="reset"
+                  (click)="cardclear()"
+                  size="small"
+                  id="submitbtn"
+                  >Clear
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </form>
+
+      <form *ngIf="tab == 3" [formGroup]="renewalstatusupdatethree">
+        <ion-card class="cardCenter">
+          <ion-card-content style="margin-top: -10px">
+            <ion-row
+              ><ion-col size="10"
+                ><ion-card-subtitle
+                  >Renewal Status 3 Update:</ion-card-subtitle
+                ></ion-col
+              >
+
+              <ion-col class="tooltipca" size="2" style="margin-top: -10px">
+                <ion-fab-button
+                  size="small"
+                  class="fab-btn"
+                  href="https://kingstrackimages.s3.ap-southeast-1.amazonaws.com/EsimExcelDowmload/RenewalCardStatusUpdate.xlsx"
+                  download="sample.xlsx"
+                >
+                  <div class="excel-wrapper"></div>
+                </ion-fab-button>
+                <span class="tooltipcatext">Renewal Status Update</span>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col
+                size="12"
+                size-sm="12"
+                size-lg="6"
+                style="margin-top: 5px"
+                size-md="12"
+              >
+                <input
+                  type="file"
+                  (change)="onFileChange($event,'status update')"
+                  formControlName="renewalstatusthree"
+                />
+              </ion-col>
+              <ion-col size="12" size-sm="12" size-lg="6" size-md="12">
+                <ion-button
+                  size="small"
+                  (click)="sendToServer('status update',3)"
+                  id="submitbtn"
+                  [disabled]="!renewalstatusupdatethree.valid"
+                  >Submit
+                </ion-button>
+                <ion-button
+                  type="reset"
+                  (click)="cardclear()"
+                  size="small"
+                  id="submitbtn"
+                  >Clear
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </form>
+
+      <form *ngIf="tab == 4" [formGroup]="renewalstatusupdatefour">
+        <ion-card class="cardCenter">
+          <ion-card-content style="margin-top: -10px">
+            <ion-row
+              ><ion-col size="10"
+                ><ion-card-subtitle
+                  >Renewal Status 4 Update:</ion-card-subtitle
+                ></ion-col
+              >
+
+              <ion-col class="tooltipca" size="2" style="margin-top: -10px">
+                <ion-fab-button
+                  size="small"
+                  class="fab-btn"
+                  href="https://kingstrackimages.s3.ap-southeast-1.amazonaws.com/EsimExcelDowmload/RenewalCardStatusUpdate.xlsx"
+                  download="sample.xlsx"
+                >
+                  <div class="excel-wrapper"></div>
+                </ion-fab-button>
+                <span class="tooltipcatext">Renewal Status Update</span>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col
+                size="12"
+                size-sm="12"
+                size-lg="6"
+                style="margin-top: 5px"
+                size-md="12"
+              >
+                <input
+                  type="file"
+                  (change)="onFileChange($event,'status update')"
+                  formControlName="renewalstatusfour"
+                />
+              </ion-col>
+              <ion-col size="12" size-sm="12" size-lg="6" size-md="12">
+                <ion-button
+                  size="small"
+                  (click)="sendToServer('status update',4)"
+                  id="submitbtn"
+                  [disabled]="!renewalstatusupdatefour.valid"
+                  >Submit
+                </ion-button>
+                <ion-button
+                  type="reset"
+                  (click)="cardclear()"
+                  size="small"
+                  id="submitbtn"
+                  >Clear
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </form>
+
+      <form *ngIf="tab == 5" [formGroup]="renewalstatusupdatefive">
+        <ion-card class="cardCenter">
+          <ion-card-content style="margin-top: -10px">
+            <ion-row
+              ><ion-col size="10"
+                ><ion-card-subtitle
+                  >Renewal Status 5 Update:</ion-card-subtitle
+                ></ion-col
+              >
+
+              <ion-col class="tooltipca" size="2" style="margin-top: -10px">
+                <ion-fab-button
+                  size="small"
+                  class="fab-btn"
+                  href="https://kingstrackimages.s3.ap-southeast-1.amazonaws.com/EsimExcelDowmload/RenewalCardStatusUpdate.xlsx"
+                  download="sample.xlsx"
+                >
+                  <div class="excel-wrapper"></div>
+                </ion-fab-button>
+                <span class="tooltipcatext">Renewal Status Update</span>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col
+                size="12"
+                size-sm="12"
+                size-lg="6"
+                style="margin-top: 5px"
+                size-md="12"
+              >
+                <input
+                  type="file"
+                  (change)="onFileChange($event,'status update')"
+                  formControlName="renewalstatusfive"
+                />
+              </ion-col>
+              <ion-col size="12" size-sm="12" size-lg="6" size-md="12">
+                <ion-button
+                  size="small"
+                  (click)="sendToServer('status update',5)"
+                  id="submitbtn"
+                  [disabled]="!renewalstatusupdatefive.valid"
+                  >Submit
+                </ion-button>
+                <ion-button
+                  type="reset"
+                  (click)="cardclear()"
+                  size="small"
+                  id="submitbtn"
+                  >Clear
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </form>
+    </ion-col>
+
+    <ion-col size="6">
+      <form *ngIf="tab == 6" [formGroup]="cacommentform">
+        <ion-card class="cardCenter">
+          <ion-card-content style="margin-top: -10px">
+            <ion-row
+              ><ion-col size="10"
+                ><ion-card-subtitle
+                  >CA Comment Update:</ion-card-subtitle
+                ></ion-col
+              >
+
+              <ion-col class="tooltipca" size="2" style="margin-top: -10px">
+                <ion-fab-button
+                  size="small"
+                  class="fab-btn"
+                  href="https://kingstrackimages.s3.ap-southeast-1.amazonaws.com/EsimExcelDowmload/CACommentUpdate.xlsx"
+                  download="sample.xlsx"
+                >
+                  <div class="excel-wrapper"></div>
+                </ion-fab-button>
+                <span class="tooltipcatext">CA comment Update</span>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col
+                size="12"
+                size-sm="12"
+                size-lg="6"
+                style="margin-top: 5px"
+                size-md="12"
+              >
+                <input
+                  type="file"
+                  (change)="onFileChange($event,'ca')"
+                  formControlName="cacommentupdate"
+                />
+              </ion-col>
+              <ion-col size="12" size-sm="12" size-lg="6" size-md="12">
+                <ion-button
+                  size="small"
+                  (click)="sendToServer('ca')"
+                  id="submitbtn"
+                  [disabled]="!cacommentform.valid"
+                  >Submit
+                </ion-button>
+                <ion-button
+                  type="reset"
+                  (click)="cardclear1()"
+                  size="small"
+                  id="submitbtn"
+                  >Clear
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </form>
+
+      <form *ngIf="tab == 1" [formGroup]="renewalcommentupdateone">
+        <ion-card class="cardCenter">
+          <ion-card-content style="margin-top: -10px">
+            <ion-row
+              ><ion-col size="10"
+                ><ion-card-subtitle
+                  >Renewal comment 1 Update:</ion-card-subtitle
+                ></ion-col
+              >
+
+              <ion-col class="tooltipca" size="2" style="margin-top: -10px">
+                <ion-fab-button
+                  size="small"
+                  class="fab-btn"
+                  href="https://kingstrackimages.s3.ap-southeast-1.amazonaws.com/EsimExcelDowmload/RenewalCommentUpdate.xlsx"
+                  download="sample.xlsx"
+                >
+                  <div class="excel-wrapper"></div>
+                </ion-fab-button>
+                <span class="tooltipcatext">Renewal comment Update</span>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col
+                size="12"
+                size-sm="12"
+                size-lg="6"
+                style="margin-top: 5px"
+                size-md="12"
+              >
+                <input
+                  type="file"
+                  (change)="onFileChange($event,'comment update')"
+                  formControlName="renewalcommentone"
+                />
+              </ion-col>
+              <ion-col size="12" size-sm="12" size-lg="6" size-md="12">
+                <ion-button
+                  size="small"
+                  (click)="sendToServer('comment update',1)"
+                  id="submitbtn"
+                  [disabled]="!renewalcommentupdateone.valid"
+                  >Submit
+                </ion-button>
+                <ion-button
+                  type="reset"
+                  (click)="cardclear1()"
+                  size="small"
+                  id="submitbtn"
+                  >Clear
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </form>
+
+      <form *ngIf="tab == 2" [formGroup]="renewalcommentupdatetwo">
+        <ion-card class="cardCenter">
+          <ion-card-content style="margin-top: -10px">
+            <ion-row
+              ><ion-col size="10"
+                ><ion-card-subtitle
+                  >Renewal comment 2 Update:</ion-card-subtitle
+                ></ion-col
+              >
+
+              <ion-col class="tooltipca" size="2" style="margin-top: -10px">
+                <ion-fab-button
+                  size="small"
+                  class="fab-btn"
+                  href="https://kingstrackimages.s3.ap-southeast-1.amazonaws.com/EsimExcelDowmload/RenewalCommentUpdate.xlsx"
+                  download="sample.xlsx"
+                >
+                  <div class="excel-wrapper"></div>
+                </ion-fab-button>
+                <span class="tooltipcatext">Renewal comment Update</span>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col
+                size="12"
+                size-sm="12"
+                size-lg="6"
+                style="margin-top: 5px"
+                size-md="12"
+              >
+                <input
+                  type="file"
+                  (change)="onFileChange($event,'comment update')"
+                  formControlName="renewalcommenttwo"
+                />
+              </ion-col>
+              <ion-col size="12" size-sm="12" size-lg="6" size-md="12">
+                <ion-button
+                  size="small"
+                  (click)="sendToServer('comment update',2)"
+                  id="submitbtn"
+                  [disabled]="!renewalcommentupdatetwo.valid"
+                  >Submit
+                </ion-button>
+                <ion-button
+                  type="reset"
+                  (click)="cardclear1()"
+                  size="small"
+                  id="submitbtn"
+                  >Clear
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </form>
+
+      <form *ngIf="tab == 3" [formGroup]="renewalcommentupdatethree">
+        <ion-card class="cardCenter">
+          <ion-card-content style="margin-top: -10px">
+            <ion-row
+              ><ion-col size="10"
+                ><ion-card-subtitle
+                  >Renewal comment 3 Update:</ion-card-subtitle
+                ></ion-col
+              >
+
+              <ion-col class="tooltipca" size="2" style="margin-top: -10px">
+                <ion-fab-button
+                  size="small"
+                  class="fab-btn"
+                  href="https://kingstrackimages.s3.ap-southeast-1.amazonaws.com/EsimExcelDowmload/RenewalCommentUpdate.xlsx"
+                  download="sample.xlsx"
+                >
+                  <div class="excel-wrapper"></div>
+                </ion-fab-button>
+                <span class="tooltipcatext">Renewal comment Update</span>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col
+                size="12"
+                size-sm="12"
+                size-lg="6"
+                style="margin-top: 5px"
+                size-md="12"
+              >
+                <input
+                  type="file"
+                  (change)="onFileChange($event,'comment update')"
+                  formControlName="renewalcommentthree"
+                />
+              </ion-col>
+              <ion-col size="12" size-sm="12" size-lg="6" size-md="12">
+                <ion-button
+                  size="small"
+                  (click)="sendToServer('comment update',3)"
+                  id="submitbtn"
+                  [disabled]="!renewalcommentupdatethree.valid"
+                  >Submit
+                </ion-button>
+                <ion-button
+                  type="reset"
+                  (click)="cardclear1()"
+                  size="small"
+                  id="submitbtn"
+                  >Clear
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </form>
+
+      <form *ngIf="tab == 4" [formGroup]="renewalcommentupdatefour">
+        <ion-card class="cardCenter">
+          <ion-card-content style="margin-top: -10px">
+            <ion-row
+              ><ion-col size="10"
+                ><ion-card-subtitle
+                  >Renewal comment 4 Update:</ion-card-subtitle
+                ></ion-col
+              >
+
+              <ion-col class="tooltipca" size="2" style="margin-top: -10px">
+                <ion-fab-button
+                  size="small"
+                  class="fab-btn"
+                  href="https://kingstrackimages.s3.ap-southeast-1.amazonaws.com/EsimExcelDowmload/RenewalCommentUpdate.xlsx"
+                  download="sample.xlsx"
+                >
+                  <div class="excel-wrapper"></div>
+                </ion-fab-button>
+                <span class="tooltipcatext">Renewal comment Update</span>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col
+                size="12"
+                size-sm="12"
+                size-lg="6"
+                style="margin-top: 5px"
+                size-md="12"
+              >
+                <input
+                  type="file"
+                  (change)="onFileChange($event,'comment update')"
+                  formControlName="renewalcommentfour"
+                />
+              </ion-col>
+              <ion-col size="12" size-sm="12" size-lg="6" size-md="12">
+                <ion-button
+                  size="small"
+                  (click)="sendToServer('comment update',4)"
+                  id="submitbtn"
+                  [disabled]="!renewalcommentupdatefour.valid"
+                  >Submit
+                </ion-button>
+                <ion-button
+                  type="reset"
+                  (click)="cardclear1()"
+                  size="small"
+                  id="submitbtn"
+                  >Clear
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </form>
+
+      <form *ngIf="tab == 5" [formGroup]="renewalcommentupdatefive">
+        <ion-card class="cardCenter">
+          <ion-card-content style="margin-top: -10px">
+            <ion-row
+              ><ion-col size="10"
+                ><ion-card-subtitle
+                  >Renewal comment 5 Update:</ion-card-subtitle
+                ></ion-col
+              >
+
+              <ion-col class="tooltipca" size="2" style="margin-top: -10px">
+                <ion-fab-button
+                  size="small"
+                  class="fab-btn"
+                  href="https://kingstrackimages.s3.ap-southeast-1.amazonaws.com/EsimExcelDowmload/RenewalCommentUpdate.xlsx"
+                  download="sample.xlsx"
+                >
+                  <div class="excel-wrapper"></div>
+                </ion-fab-button>
+                <span class="tooltipcatext">Renewal comment Update</span>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col
+                size="12"
+                size-sm="12"
+                size-lg="6"
+                style="margin-top: 5px"
+                size-md="12"
+              >
+                <input
+                  type="file"
+                  (change)="onFileChange($event,'comment update')"
+                  formControlName="renewalcommentfive"
+                />
+              </ion-col>
+              <ion-col size="12" size-sm="12" size-lg="6" size-md="12">
+                <ion-button
+                  size="small"
+                  (click)="sendToServer('comment update',5)"
+                  id="submitbtn"
+                  [disabled]="!renewalcommentupdatefive.valid"
+                  >Submit
+                </ion-button>
+                <ion-button
+                  type="reset"
+                  (click)="cardclear1()"
+                  size="small"
+                  id="submitbtn"
+                  >Clear
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </form>
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="form-field" *ngIf="myPlatform == 'desktop'">
+    <ion-col size="7" style="margin-top: 15px">
+      <form [formGroup]="statusform">
+        <ion-row style="text-align: center">
+          <ion-col>
+            <ion-item>
+              <ion-label
+                position="floating"
+                style="color: blue; font-weight: lighter"
+              >
+                IMEI Number :</ion-label
+              >
+              <ion-input type="number" formControlName="imeino"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col style="align-self: center">
+            <ion-button
+              (click)="Submit()"
+              id="submitbtn"
+              size="small"
+              [disabled]="!statusform.valid"
+              >Submit</ion-button
+            >
+
+            <ion-button
+              type="reset"
+              (click)="clear()"
+              size="small"
+              id="submitbtn"
+              >Clear</ion-button
+            >
+          </ion-col></ion-row
+        >
+      </form>
+    </ion-col>
+  </ion-row>
+
+  <ion-row *ngIf="show">
+    <ion-col>
+      <ion-row *ngIf="myPlatform != 'desktop'">
+        <ion-col class="form-field" style="text-align: center"
+          ><ion-button *ngIf="tab != 6" size="small" (click)="Simupdate()">
+            Sim Update</ion-button
+          ><ion-button size="small" (click)="checkstatus()">
+            Status Update</ion-button
+          ><ion-button size="small" (click)="Comment()"
+            >Comment</ion-button
+          ></ion-col
+        >
+      </ion-row>
+
+      <ion-row *ngIf="myPlatform == 'desktop'">
+        <ion-col style="text-align: end">
+          <ion-button size="small" (click)="requestdateupdate()">
+            Request Date Update</ion-button
+          >
+
+          <ion-button *ngIf="tab != 6" size="small" (click)="Simupdate()">
+            Sim Update</ion-button
+          ><ion-button size="small" (click)="checkstatus()">
+            Status Update</ion-button
+          ><ion-button size="small" (click)="Comment()"
+            >Comment</ion-button
+          ></ion-col
+        >
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <jqxGrid
+            #myGrid
+            [theme]="'material'"
+            (onRowclick)="myGridOnRowSelect($event)"
+            [enablebrowserselection]="true"
+            [pagesizeoptions]="page"
+            [width]="'99.5%'"
+            [autoheight]="true"
+            [source]="dataAdapter"
+            [columns]="columns"
+            [filterable]="true"
+            [sortable]="true"
+            [columnsresize]="true"
+            [enabletooltips]="true"
+            [pageable]="true"
+            style="
+              font-size: 16px;
+              text-align: center !important;
+              margin: auto;
+              cursor: pointer;
+            "
+          >
+          </jqxGrid> </ion-col
+      ></ion-row>
+    </ion-col>
+  </ion-row>
+</ion-content>

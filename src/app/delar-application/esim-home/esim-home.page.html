@@ -1,0 +1,246 @@
+<ion-header>
+  <ion-toolbar class="dealerHeader">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons
+      *ngIf="myPlatform == 'desktop'&&companyId == 'apm-sa'"
+      slot="start"
+    >
+      <ion-icon
+        routerLink="/tabs-login/esim-dashboard"
+        name="arrow-back"
+        style="padding: 10px; cursor: pointer"
+        slot="start"
+      ></ion-icon>
+    </ion-buttons>
+    <ion-title>Monitoring Dashboard</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [scrollEvents]="true" (ionScroll)="logScrolling($event)">
+  <ion-row *ngIf="myPlatform != 'desktop'">
+    <ion-col class="form-field">
+      <ion-row class="form-field">
+        <ion-col>
+          <ion-row class="tabrow">
+            <ion-col>
+              <ion-row>
+                <div class="wrap">
+                  <button
+                    (click)="switchGrid(1)"
+                    [ngClass]="{nexttab:true,select:showGrid==1}"
+                    size="2.5"
+                  >
+                    CA
+                  </button>
+                </div>
+                <div class="wrap">
+                  <button
+                    (click)="switchGrid(2)"
+                    [ngClass]="{nexttab:true,select:showGrid==2}"
+                    size="2.5"
+                  >
+                    Renewal
+                  </button>
+                </div>
+                <div class="wrap">
+                  <button
+                    (click)="switchGrid(3)"
+                    [ngClass]="{nexttab:true,select:showGrid==3}"
+                    size="2.5"
+                  >
+                    Extend 1 Year
+                  </button>
+                </div>
+                <div class="wrap">
+                  <button
+                    (click)="switchGrid(4)"
+                    [ngClass]="{nexttab:true,select:showGrid==4}"
+                    size="2.5"
+                  >
+                    Topup
+                  </button>
+                </div>
+              </ion-row>
+            </ion-col>
+          </ion-row></ion-col
+        ></ion-row
+      ></ion-col
+    ></ion-row
+  >
+
+  <ion-row *ngIf="myPlatform == 'desktop'" class="tabrow">
+    <ion-col>
+      <ion-row>
+        <div class="wrap">
+          <button
+            (click)="switchGrid(1)"
+            [ngClass]="{nexttab:true,select:showGrid==1}"
+          >
+            Pending CA
+          </button>
+        </div>
+        <div class="wrap">
+          <button
+            (click)="switchGrid(2)"
+            [ngClass]="{nexttab:true,select:showGrid==2}"
+          >
+            Pending Renewal
+          </button>
+        </div>
+        <div class="wrap">
+          <button
+            (click)="switchGrid(3)"
+            [ngClass]="{nexttab:true,select:showGrid==3}"
+          >
+            Pending Extend 1 Year
+          </button>
+        </div>
+        <div class="wrap">
+          <button
+            (click)="switchGrid(4)"
+            [ngClass]="{nexttab:true,select:showGrid==4}"
+          >
+            Pending Topup
+          </button>
+        </div>
+        <div *ngIf="companyId=='apm-sa'" class="wrap">
+          <button
+            (click)="switchGrid(5)"
+            [ngClass]="{nexttab:true,select:showGrid==5}"
+          >
+            Invoice Summary
+          </button>
+        </div>
+        <div *ngIf="companyId=='apm-sa'" class="wrap">
+          <button
+            (click)="switchGrid(6)"
+            [ngClass]="{nexttab:true,select:showGrid==6}"
+          >
+            Monthly Invoice Summary
+          </button>
+        </div>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+
+  <ion-row *ngIf="myPlatform == 'desktop' && showGrid == 6" class="upperRow">
+    <ion-col
+      [ngClass]="{selectedUpperCol:true,selected:tab=='renewal'}"
+      (click)="switchtab('renewal')"
+      size="1.9"
+    >
+      <ion-label>Renewal</ion-label>
+    </ion-col>
+    <ion-col
+      [ngClass]="{selectedUpperCol:true,selected:tab=='topup'}"
+      (click)="switchtab('topup')"
+      size="1.9"
+    >
+      <ion-label>Topup</ion-label>
+    </ion-col>
+    <ion-col
+      [ngClass]="{selectedUpperCol:true,selected:tab=='extend'}"
+      (click)="switchtab('extend')"
+      size="1.9"
+    >
+      <ion-label>Extend One Year</ion-label>
+    </ion-col>
+    <ion-col
+      [ngClass]="{selectedUpperCol:true,selected:tab=='bsnl'}"
+      (click)="switchtab('bsnl')"
+      size="1.9"
+    >
+      <ion-label>BSNL Certificate</ion-label>
+    </ion-col>
+  </ion-row>
+
+  <ion-row *ngIf="companyId == 'apm-sa' && showGrid <= 4" class="tabrows">
+    <ion-col
+      style="margin-left: 18px; margin-top: 8px"
+      size="6"
+      size-lg="3"
+      size-md="3"
+    >
+      <smart-drop-down-list
+        (change)="selectDealer($event)"
+        class="drop-down-list-modes-demo"
+        [placeholder]="'apm'"
+        [filterable]="true"
+        [dropDownPosition]="'bottom'"
+        #dropdownlistDealer
+      >
+      </smart-drop-down-list>
+    </ion-col>
+  </ion-row>
+
+  <ion-row *ngIf="showGrid == 1" style="margin-top: -10px">
+    <ion-col size="12">
+      <!-- <ion-card id="1"> -->
+      <app-dashboardgrid [dealer]="dealer" [grid]="1"> </app-dashboardgrid>
+      <!-- </ion-card> -->
+    </ion-col>
+  </ion-row>
+  <ion-row *ngIf="showGrid == 2">
+    <ion-col size="12">
+      <!-- <ion-card id="1"> -->
+      <app-dashboardgrid [dealer]="dealer" [grid]="2"> </app-dashboardgrid>
+      <!-- </ion-card> -->
+    </ion-col>
+  </ion-row>
+
+  <ion-row *ngIf="showGrid == 3">
+    <ion-col size="12">
+      <!-- <ion-card id="1"> -->
+      <app-dashboardgrid [dealer]="dealer" [grid]="3"> </app-dashboardgrid>
+      <!-- </ion-card> -->
+    </ion-col>
+  </ion-row>
+  <ion-row *ngIf="showGrid == 4">
+    <ion-col size="12">
+      <!-- <ion-card id="1"> -->
+      <app-dashboardgrid [dealer]="dealer" [grid]="4"> </app-dashboardgrid>
+      <!-- </ion-card> -->
+    </ion-col>
+  </ion-row>
+  <ion-row *ngIf="showGrid == 5">
+    <ion-col size="12">
+      <!-- <ion-card id="1"> -->
+      <app-dashboardgrid [dealer]="dealer" [grid]="5"> </app-dashboardgrid>
+      <!-- </ion-card> -->
+    </ion-col>
+  </ion-row>
+  <ion-row *ngIf="showGrid == 6">
+    <ion-col size="12">
+      <!-- <ion-card id="1"> -->
+      <app-dashboardgrid [dealer]="dealer" [tab]="tab"> </app-dashboardgrid>
+      <!-- </ion-card> -->
+    </ion-col>
+  </ion-row>
+  <ion-row class="space"> </ion-row>
+
+  <ion-fab
+    *ngIf="arrow"
+    style="margin-right: 1%; margin-bottom: 9%"
+    slot="fixed"
+    vertical="bottom"
+    horizontal="end"
+  >
+    <ion-fab-button class="fabbutton" size="small" (click)="scrollToTop()">
+      <ion-icon class="icon" name="arrow-up"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-fab
+    *ngIf="arrow"
+    style="margin-right: 1%; margin-bottom: 5%"
+    slot="fixed"
+    vertical="bottom"
+    horizontal="end"
+  >
+    <ion-fab-button class="fabbutton" size="small" (click)="scrollToBottom()">
+      <ion-icon class="icon" name="arrow-down"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

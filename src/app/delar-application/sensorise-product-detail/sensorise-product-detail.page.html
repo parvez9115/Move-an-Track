@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-toolbar class="dealerHeader">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Sensorise Product Detail</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row class="wrapper-container">
+    <ion-col size="12">
+      <form [formGroup]="productdetails">
+        <ion-row class="form-field">
+          <ion-col size="12" size-lg="2.4" size-md="2.4">
+            <ion-label class="label-head">Action :</ion-label>
+            <ion-input type="text" placeholder="Enter the Action" class="input"
+              formControlName="actionname"></ion-input>
+          </ion-col>
+
+          <ion-col size="12" size-lg="3.4" size-md="2.4">
+            <ion-label class="label-head">Product Name :</ion-label>
+            <ion-input type="text" placeholder="Enter the Product Name" class="input"
+              formControlName="productname"></ion-input>
+          </ion-col>
+          <ion-col size="12" size-lg="3.9" size-md="3.9">
+            <ion-label class="label-head">Zoho Product Name :</ion-label>
+            <ionic-selectable (onChange)="selectvalue($event)" class="input selectable-input" [(ngModel)]="product"
+              formControlName="zohoproductname" placeholder="Select the Product Name" [items]="books" [canSearch]="true"
+              [hasVirtualScroll]="true" itemValueField="itemname" itemTextField="itemname">
+            </ionic-selectable>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+
+          <ion-col size="12" size-lg="2.4" size-md="2.4">
+            <ion-label class="label-head">Product Price :</ion-label>
+            <ion-input type="number" placeholder="Enter the Price" class="input" formControlName="price"></ion-input>
+          </ion-col>
+          <ion-col size="12" size-lg="2.4" size-md="2.4">
+            <ion-label class="label-head">Late Fees :</ion-label>
+            <ion-input type="number" placeholder="Enter the Fees" class="input" formControlName="latefees"></ion-input>
+          </ion-col>
+
+          <ion-col size="12" size-lg="2.4" size-md="2.4" style="margin-top: 27px; text-align: center">
+            <ion-button *ngIf="!hideSerialNo" class="submitbtn" (click)="add()"
+              [disabled]="!productdetails.valid || button">Add</ion-button>
+            <ion-button *ngIf="hideSerialNo" class="submitbtn" (click)="edit()"
+              [disabled]="!productdetails.valid || button">Edit</ion-button>
+            <ion-button class="submitbtn" (click)="clear()">Clear</ion-button>
+          </ion-col>
+        </ion-row>
+      </form>
+    </ion-col>
+  </ion-row>
+
+  <ion-row style="margin-top: 5px">
+    <ion-col size="12">
+      <jqxGrid #myGrid (onRowclick)="myGridOnRowSelect($event)" [theme]="'material'" [width]="'99%'" [autoheight]="true"
+        [source]="dataAdapter" [enablebrowserselection]="true" [columns]="columns" [sortable]="true" [filterable]="true"
+        [columns]="columns" [columnsresize]="true" [enabletooltips]="true" [pageable]="true" [showfilterrow]="true"
+        style="
+          font-size: 16px;
+          text-align: center !important;
+          margin: auto;
+          cursor: pointer;
+        ">
+      </jqxGrid>
+    </ion-col>
+  </ion-row>
+</ion-content>

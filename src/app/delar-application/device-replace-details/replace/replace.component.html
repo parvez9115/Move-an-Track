@@ -1,0 +1,69 @@
+<ion-header>
+  <ion-toolbar mode="md" class="dealerHeader">
+    <ion-buttons slot="start">
+      <ion-icon
+        (click)="cancelBtn()"
+        name="arrow-back"
+        style="padding: 10px"
+        slot="start"
+      ></ion-icon>
+    </ion-buttons>
+    <ion-title>Replace device</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="myPlatform == 'desktop'" class="content-style label-style">
+  <ion-row class="form-field">
+    <ion-col style="margin-top: 15px">
+      <form [formGroup]="addDeviceForm">
+        <ion-row class="total-data">
+          <ion-col>
+            <ion-row class="content-style">
+              <ion-col size="4" class="col-content">Iccid No:</ion-col>
+              <ion-col size="7">
+                <ion-input
+                  placeholder="Enter the iccidno"
+                  class="label-style"
+                  type="text"
+                  formControlName="iccidno"
+                >
+                </ion-input>
+              </ion-col>
+            </ion-row>
+
+            <ion-row class="content-style">
+              <ion-col size="4" class="col-content">Imei No:</ion-col>
+              <ion-col size="7">
+                <ion-input
+                  placeholder="Enter the imeino"
+                  class="label-style"
+                  type="text"
+                  formControlName="imeino"
+                >
+                </ion-input>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </form>
+
+      <ion-row class="content-style">
+        <ion-col style="text-align: center !important; padding: 10px">
+          <ion-button
+            class="button"
+            type="submit"
+            [disabled]="
+              addDeviceForm.value.iccidno == '' &&
+              addDeviceForm.value.imeino == ''
+            "
+            (click)="addDevice()"
+            >Submit
+          </ion-button>
+          <ion-button class="button" (click)="cancelBtn()" type="cancel"
+            >Cancel</ion-button
+          >
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+</ion-content>

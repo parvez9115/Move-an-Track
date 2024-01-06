@@ -1,0 +1,123 @@
+<ion-header>
+  <ion-toolbar mode="md" class="dealerHeader">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons
+      *ngIf="myPlatform == 'desktop'&&companyId == 'apm-sa'"
+      slot="start"
+    >
+      <ion-icon
+        routerLink="/tabs-login/esim-dashboard"
+        name="arrow-back"
+        style="padding: 10px; cursor: pointer"
+        slot="start"
+      ></ion-icon>
+    </ion-buttons>
+    <ion-row>
+      <ion-title>Esim Zoho Book Customers</ion-title>
+      <ion-col
+        *ngIf="myPlatform == 'desktop'"
+        size="4"
+        style="text-align: right"
+      >
+        <ion-button class="submitBtn" size="small" (click)="newfunc()"
+          >Export</ion-button
+        >
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row class="wrapper-container">
+      <ion-col size="12">
+        <form [formGroup]="Esimzohocustomer">
+          <ion-row class="form-field">
+            <ion-col size="12" size-lg="2.4" size-md="2.4">
+              <ion-label class="label-head">Dealer :</ion-label>
+              <ionic-selectable
+                class="input selectable-input"
+                formControlName="dealername"
+                placeholder="Select the Dealer"
+                [items]="dealer"
+                [canSearch]="true"
+                [hasVirtualScroll]="true"
+              >
+              </ionic-selectable>
+            </ion-col>
+
+            <ion-col size="12" size-lg="3.9" size-md="3.9">
+              <ion-label class="label-head">Zoho Customer :</ion-label>
+              <ionic-selectable
+                (onChange)="selectvalue($event)"
+                class="input selectable-input"
+                [(ngModel)]="product"
+                formControlName="customername"
+                placeholder="Select the Customer Name"
+                [items]="books"
+                [canSearch]="true"
+                [hasVirtualScroll]="true"
+                itemValueField="customername"
+                itemTextField="customername"
+              >
+              </ionic-selectable>
+            </ion-col>
+
+            <ion-col
+              size="12"
+              size-lg="2.4"
+              size-md="2.4"
+              style="margin: 25px 0px 0px; text-align: end"
+            >
+              <ion-button
+                *ngIf="!hideSerialNo"
+                class="submitbtn"
+                (click)="submit()"
+                [disabled]="!Esimzohocustomer.valid"
+                >Add</ion-button
+              >
+              <ion-button
+                *ngIf="hideSerialNo"
+                class="submitbtn"
+                (click)="edit()"
+                [disabled]="!Esimzohocustomer.valid"
+                >Save</ion-button
+              >
+              <ion-button class="submitbtn" (click)="clear()">Clear</ion-button>
+            </ion-col>
+          </ion-row>
+        </form>
+      </ion-col>
+    </ion-row>
+
+    <ion-row
+      ><ion-col>
+        <jqxGrid
+          #myGrid
+          (onRowclick)="myGridOnRowSelect($event)"
+          [theme]="'material'"
+          [width]="'99%'"
+          [autoheight]="true"
+          [source]="dataAdapter"
+          [columns]="columns"
+          [sortable]="true"
+          [filterable]="true"
+          [columnsresize]="true"
+          [enablebrowserselection]="true"
+          [enabletooltips]="true"
+          [pagesizeoptions]="page"
+          [pageable]="true"
+          [showfilterrow]="true"
+          style="
+            font-size: 16px;
+            text-align: center !important;
+            margin: auto;
+            cursor: pointer;
+          "
+        >
+        </jqxGrid> </ion-col
+    ></ion-row>
+  </ion-grid>
+</ion-content>

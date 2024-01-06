@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar class="dealerHeader">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-row>
+      <ion-title>Inventory Details</ion-title>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row style="padding: 10px">
+    <ion-col>
+      <jqxGrid
+        #myGrid
+        [theme]="'material'"
+        (onRowclick)="myGridOnRowSelect($event)"
+        [width]="'99.5%'"
+        [autoheight]="true"
+        [source]="dataAdapter"
+        [enablebrowserselection]="true"
+        [sortable]="true"
+        [columns]="columns"
+        [columns]="columns"
+        [filterable]="true"
+        [enabletooltips]="true"
+        [pageable]="true"
+        [showfilterrow]="true"
+        style="
+          font-size: 16px;
+          text-align: center !important;
+          margin: auto;
+          cursor: pointer;
+        "
+        [columnsresize]="true"
+      >
+      </jqxGrid> </ion-col
+  ></ion-row>
+</ion-content>

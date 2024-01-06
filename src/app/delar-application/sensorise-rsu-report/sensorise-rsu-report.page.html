@@ -1,0 +1,78 @@
+<ion-header>
+  <ion-toolbar class="dealerHeader">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Sensorise RSU Report</ion-title>
+    <ion-button
+      *ngIf="myPlatform == 'desktop'"
+      slot="end"
+      class="submitBtn"
+      size="small"
+      (click)="newfunc()"
+      >Export</ion-button
+    >
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row class="wrapper-container">
+    <ion-col size="12">
+      <form [formGroup]="rsuform">
+        <ion-row class="form-field">
+          <ion-col size="12" size-lg="4" size-md="4">
+            <ion-label class="label-head">RSU Date:</ion-label>
+            <ion-input
+              type="date"
+              formControlName="rsudate"
+              [max]="maxDate"
+              class="input"
+            ></ion-input>
+          </ion-col>
+          <ion-col
+            size="12"
+            size-lg="2.4"
+            size-md="2.4"
+            style="margin: 25px 0px 0px; text-align: end"
+          >
+            <ion-button
+              class="submitbtn"
+              (click)="Submit()"
+              [disabled]="!rsuform.valid"
+              >Submit</ion-button
+            >
+            <ion-button class="submitbtn" (click)="clear()">Clear</ion-button>
+          </ion-col>
+        </ion-row>
+      </form>
+    </ion-col>
+  </ion-row>
+
+  <ion-row style="margin-top: 5px" *ngIf="show">
+    <ion-col size="12">
+      <jqxGrid
+        #myGrid
+        [theme]="'material'"
+        [width]="'99%'"
+        [autoheight]="true"
+        [source]="dataAdapter"
+        [columns]="columns"
+        [sortable]="true"
+        [filterable]="true"
+        [columnsresize]="true"
+        [enablebrowserselection]="true"
+        [enabletooltips]="true"
+        [pagesizeoptions]="page"
+        [pageable]="true"
+        [showfilterrow]="true"
+        style="
+          font-size: 16px;
+          text-align: center !important;
+          margin: auto;
+          cursor: pointer;
+        "
+      >
+      </jqxGrid>
+    </ion-col>
+  </ion-row>
+</ion-content>

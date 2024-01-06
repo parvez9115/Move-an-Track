@@ -1,0 +1,27 @@
+.header {
+  font-size: 16px;
+  color: white;
+}
+.arrow-back {
+  color: white;
+}
+.dismiss {
+  font-size: 25px;
+  cursor: pointer;
+}
+.dismiss:hover {
+  color: red;
+}
+.dealer-label {
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px;
+}
+.input {
+  border: 1px solid #e5e5e5;
+  height: 42px;
+  line-height: 18px;
+  --padding-start: 15px;
+  background: #e8e8e8;
+  margin: 7px;
+}

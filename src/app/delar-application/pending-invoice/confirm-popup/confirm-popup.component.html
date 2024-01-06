@@ -1,0 +1,51 @@
+<ion-content>
+  <form [formGroup]="confirmform">
+    <ion-row>
+      <ion-col
+        style="
+          text-align: center;
+          margin-top: 15px;
+          font-size: 20px;
+          color: red;
+        "
+      >
+        Confirmation Delete
+      </ion-col>
+    </ion-row>
+
+    <ion-row style="margin-top: 15px">
+      <ion-col style="padding: 10px" size="12">
+        <ion-item>
+          <ion-input
+            label="User Name"
+            labelPlacement="floating"
+            placeholder="Enter the User Name"
+            formControlName="username"
+            [clearInput]="true"
+          ></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col style="padding: 10px" size="12">
+        <ion-item>
+          <ion-input
+            label="Password"
+            labelPlacement="floating"
+            placeholder="Enter the Password"
+            formControlName="password"
+            type="password"
+          ></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row style="margin-top: 25px">
+      <ion-col style="text-align: center">
+        <ion-button size="small" (click)="submit()">Submit</ion-button>
+        <ion-button size="small" (click)="cancel()">Cancel</ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>

@@ -1,0 +1,148 @@
+<ion-header>
+  <ion-toolbar mode="md" class="dealerHeader">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons
+      *ngIf="myPlatform == 'desktop'&&companyId == 'apm-sa'"
+      slot="start"
+    >
+      <ion-icon
+        routerLink="/tabs-login/esim-dashboard"
+        name="arrow-back"
+        style="padding: 10px; cursor: pointer"
+        slot="start"
+      ></ion-icon>
+    </ion-buttons>
+    <ion-row>
+      <ion-title>Device Return Details</ion-title>
+      <ion-col *ngIf="myPlatform == 'desktop'">
+        <ion-row style="margin: 0px; padding: 0; float: right">
+          <ion-col style="margin-top: 0" class="tooltip">
+            <ion-fab-button
+              size="small"
+              class="fab-btn"
+              href="https://kingstrackimages.s3.ap-southeast-1.amazonaws.com/EsimExcelDowmload/EsimReturnIMEI.xlsx"
+              download="sample.xlsx"
+            >
+              <div class="excel-wrapper"></div>
+            </ion-fab-button>
+            <span class="tooltiptext">Excel-Format</span>
+          </ion-col>
+          <ion-col style="margin-top: 0; text-align: right">
+            <ion-button class="submitBtn" size="small" (click)="newfunc()"
+              >Export</ion-button
+            >
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row class="wrapper-container">
+    <ion-col>
+      <form [formGroup]="returnForm">
+        <ion-row class="form-field">
+          <ion-col size="12" size-lg="3" size-md="3">
+            <ion-label class="label-head">Box No:</ion-label>
+            <ion-input
+              type="text"
+              placeholder="Enter the Box No"
+              formControlName="boxno"
+              class="input"
+            ></ion-input>
+          </ion-col>
+          <ion-col size="12" size-lg="3" size-md="3">
+            <ion-label class="label-head">IMEI No:</ion-label>
+            <ion-input
+              type="text"
+              placeholder="Enter the Imei No"
+              formControlName="imeino"
+              class="input"
+            ></ion-input>
+          </ion-col>
+          <ion-col
+            size="12"
+            size-lg="2.4"
+            size-md="2.4"
+            style="margin: 25px 0px 0px; text-align: center; align-self: center"
+          >
+            <ion-button
+              class="submitbtn"
+              (click)="SearchData()"
+              [disabled]="returnForm.value.boxno  == '' && returnForm.value.imeino  == ''"
+              >Submit</ion-button
+            >
+            <ion-button class="submitbtn" (click)="clear()">Clear</ion-button>
+          </ion-col>
+        </ion-row>
+      </form>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <form [formGroup]="bulkreturn">
+        <ion-row class="form-field">
+          <ion-col size="12" size-lg="3" size-md="3">
+            <ion-label class="label-head">File Upload:</ion-label>
+            <input
+              type="file"
+              (change)="onFileChange($event)"
+              formControlName="fileupload"
+              class="documents"
+            />
+          </ion-col>
+
+          <ion-col
+            size="12"
+            size-lg="2.4"
+            size-md="2.4"
+            style="margin: 25px 0px 0px; text-align: center; align-self: center"
+          >
+            <ion-button
+              class="submitbtn"
+              (click)="submitwithfile()"
+              [disabled]="bulkreturn.value.fileupload  == ''"
+              >Submit</ion-button
+            >
+            <ion-button class="submitbtn" (click)="fileclear()"
+              >Clear</ion-button
+            >
+          </ion-col>
+        </ion-row>
+      </form>
+    </ion-col>
+  </ion-row>
+
+  <ion-row *ngIf="show">
+    <ion-col>
+      <jqxGrid
+        #myGrid
+        (onRowclick)="myGridOnRowSelect($event)"
+        [theme]="'material'"
+        [width]="'99%'"
+        [autoheight]="true"
+        [source]="dataAdapter"
+        [columns]="columns"
+        [sortable]="true"
+        [filterable]="true"
+        [columnsresize]="true"
+        [enablebrowserselection]="true"
+        [enabletooltips]="true"
+        [pagesizeoptions]="page"
+        [pageable]="true"
+        [showfilterrow]="true"
+        style="
+          font-size: 16px;
+          text-align: center !important;
+          margin: auto;
+          cursor: pointer;
+        "
+      >
+      </jqxGrid>
+    </ion-col>
+  </ion-row>
+</ion-content>

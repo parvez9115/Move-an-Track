@@ -1,0 +1,149 @@
+<ion-header>
+  <ion-toolbar class="dealerHeader">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Sensorise Advance Payment</ion-title>
+    <ion-button *ngIf="myPlatform == 'desktop'" slot="end" class="submitBtn" size="small"
+      (click)="newfunc()">Export</ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row *ngIf="myPlatform != 'desktop'" class="tabrow">
+    <ion-col class="form-field">
+      <ion-row class="form-field">
+        <div class="wrap">
+          <button (click)="getdatas('newcardpurchase')" [ngClass]="{nexttab:true,select:tab=='newcardpurchase'}"
+            size="2.5">
+            New Card Purchase
+          </button>
+        </div>
+        <div class="wrap">
+          <button (click)="getdatas('ca')" [ngClass]="{nexttab:true,select:tab=='ca'}" size="2.5">
+            CA
+          </button>
+        </div>
+        <div class="wrap">
+          <button (click)="getdatas('topup')" [ngClass]="{nexttab:true,select:tab=='topup'}" size="2.5">
+            Topup
+          </button>
+        </div>
+        <div class="wrap">
+          <button (click)="getdatas('renewal')" [ngClass]="{nexttab:true,select:tab=='renewal'}" size="2.5">
+            Renewal
+          </button>
+        </div>
+
+        <div class="wrap">
+          <button (click)="getdatas('suspended')" [ngClass]="{nexttab:true,select:tab=='suspended'}" size="2.5">
+            Suspended
+          </button>
+        </div>
+
+        <div class="wrap">
+          <button (click)="getdatas('pd1sr')" [ngClass]="{nexttab:true,select:tab=='pd1sr'}" size="2.5">
+            PD 1st SR
+          </button>
+        </div>
+
+        <div class="wrap">
+          <button (click)="getdatas('pd2sr')" [ngClass]="{nexttab:true,select:tab=='pd2sr'}" size="2.5">
+            PD 2st SR
+          </button>
+        </div>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+
+  <ion-row *ngIf="myPlatform == 'desktop'" class="tabrow">
+    <ion-col>
+      <ion-row>
+        <div class="wrap">
+          <button (click)="getdatas('newcardpurchase')" [ngClass]="{nexttab:true,select:tab=='newcardpurchase'}">
+            New Card Purchase
+          </button>
+        </div>
+        <div class="wrap">
+          <button (click)="getdatas('ca')" [ngClass]="{nexttab:true,select:tab=='ca'}">
+            CA
+          </button>
+        </div>
+        <div class="wrap">
+          <button (click)="getdatas('topup')" [ngClass]="{nexttab:true,select:tab=='topup'}">
+            Topup
+          </button>
+        </div>
+        <div class="wrap">
+          <button (click)="getdatas('renewal')" [ngClass]="{nexttab:true,select:tab=='renewal'}">
+            Renewal
+          </button>
+        </div>
+
+        <div class="wrap">
+          <button (click)="getdatas('suspended')" [ngClass]="{nexttab:true,select:tab=='suspended'}">
+            Suspended
+          </button>
+        </div>
+
+        <div class="wrap">
+          <button (click)="getdatas('pd1sr')" [ngClass]="{nexttab:true,select:tab=='pd1sr'}">
+            PD 1st SR
+          </button>
+        </div>
+
+        <div class="wrap">
+          <button (click)="getdatas('pd2sr')" [ngClass]="{nexttab:true,select:tab=='pd2sr'}">
+            PD 2st SR
+          </button>
+        </div>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+
+  <ion-row *ngIf="myPlatform != 'desktop'" class="form-field">
+    <ion-col class="form-field">
+      <ion-row>
+        <ion-col style="margin: 10px 0px 0px; text-align: end">
+          <ion-button class="submitbtn" (click)="addModel()">Add</ion-button>
+          <ion-button (click)="editModel()">Edit</ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col style="margin: 10px 0px 0px">
+          <ion-label>
+            <span class="dealer-label">Total Balance Amt :</span>
+            <span class="dealer-data">{{balance.BalanceAmount}}</span>
+          </ion-label>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+
+  <ion-row *ngIf="myPlatform == 'desktop'" class="form-field">
+    <ion-col style="margin: 25px 0px 0px">
+      <ion-label>
+        <span class="dealer-label">Total Balance Amt :</span>
+        <span class="dealer-data">{{balance.BalanceAmount}}</span>
+      </ion-label>
+    </ion-col>
+    <ion-col style="margin: 10px 0px 0px; text-align: end">
+      <ion-button class="submitbtn" (click)="addModel()">Add</ion-button>
+      <ion-button (click)="editModel()">Edit</ion-button>
+    </ion-col>
+  </ion-row>
+
+  <ion-row style="margin-top: 5px">
+    <ion-col>
+      <jqxGrid #myGrid [theme]="'material'" (onRowclick)="myGridOnRowSelect($event)" [width]="'99%'" [autoheight]="true"
+        [enablebrowserselection]="true" [source]="dataAdapter" [sortable]="true" [filterable]="true" [columns]="columns"
+        [columnsresize]="true" [enabletooltips]="true" [pageable]="true" [showfilterrow]="true" style="
+          font-size: 16px;
+          text-align: center !important;
+          margin: auto;
+          cursor: pointer;
+        ">
+      </jqxGrid>
+    </ion-col>
+  </ion-row>
+</ion-content>
